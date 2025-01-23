@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collections - VISIONHEARTZ</title>
+    
+    <!-- External CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Italiana&display=swap" rel="stylesheet">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            --primary-red: #FF3333;
+            --primary-black: #0A0A0A;
+            --secondary-black: #121212;
+            --text-white: #FFFFFF;
+            --text-gray: #888888;
+            --gradient-1: linear-gradient(135deg, #FF3333 0%, #800020 100%);
+            --card-bg: rgba(18, 18, 18, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--primary-black);
+            color: var(--text-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Announcement Banner */
+        .announcement-banner {
+            background: var(--gradient-1);
+            color: var(--text-white);
+            text-align: center;
+            padding: 0.75rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 2000;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: rgba(10, 10, 10, 0.95);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 38px;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-family: 'Italiana', serif;
+            font-size: 1.75rem;
+            color: var(--text-white);
+            text-decoration: none;
+            letter-spacing: 3px;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--primary-red);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-white);
+            font-weight: 500;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cart-icon {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-white);
+            margin-left: 2rem;
+            position: relative;
+        }
+
+        .cart-icon svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .cart-icon:hover svg {
+            color: var(--primary-red);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--primary-red);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.15rem 0.4rem;
+            border-radius: 1rem;
+            min-width: 1.2rem;
+            text-align: center;
+        }
+
+        /* Collections Header */
+        .collections-header {
+            padding: 180px 5% 80px;
+            text-align: center;
+            background: var(--secondary-black);
+        }
+
+        .collections-title {
+            font-family: 'Italiana', serif;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .collections-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Category Navigation */
+        .category-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .category-btn {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 4px;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--gradient-1);
+            border-color: transparent;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            position: relative;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            display: none;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .product-card.show {
+            display: block;
+        }
+
+        .product-image {
+            position: relative;
+            width: 100%;
+            padding-top: 125%;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-card:not([data-category="hats"]) .product-image img {
+            filter: blur(5px);
+        }
+
+        .coming-soon-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .coming-soon-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .product-card:not([data-category="hats"]):hover .coming-soon-overlay {
+            opacity: 1;
+        }
+
+        .product-card:not([data-category="hats"]):hover .coming-soon-text {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .product-details {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .product-price {
+            color: var(--primary-red);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .add-to-cart {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            background: var(--gradient-1);
+            color: var(--text-white);
+            border: none;
+            cursor: pointer;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .product-card[data-category="hats"]:hover .add-to-cart {
+            transform: translateY(0);
+        }
+
+        .best-seller-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--gradient-1);
+            color: var(--text-white);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            z-index: 10;
+            letter-spacing: 0.05em;
+        }
+
+        /* Newsletter Banner */
+        .newsletter-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .newsletter-banner-text {
+            color: var(--text-white);
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+        }
+
+        .newsletter-banner-button {
+            padding: 0.75rem 2rem;
+            background: var(--gradient-1);
+            color: var(--text-white);
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-banner-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 51, 51, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .collections-title {
+                font-size: 2.5rem;
+            }
+
+            .category-nav {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .newsletter-banner {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1.5rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Announcement Banner -->
+    <div class="announcement-banner">
+        End of season markdowns. <span>Get up to 30% off select styles.</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">VISIONHEARTZ</a>
+        <div class="nav-links">
+            <a href="collections.html">Collection</a>
+            <a href="about.html">Vision</a>
+            <a href="contact.html">Contact</a>
+            <a href="/cart" class="cart-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+                <span class="cart-count">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Collections Header -->
+    <header class="collections-header">
+        <h1 class="collections-title">Our Collections</h1>
+        <p class="collections-subtitle">Elevate your style with our carefully curated selections, designed for those who dare to dream bigger.</p>
+        
+        <!-- Category Navigation -->
+        <div class="category-nav">
+            <button class="category-btn active" data-category="all">All</button>
+            <button class="category-btn" data-category="hats">Hats</button>
+            <button class="category-btn" data-category="shirts">Shirts</button>
+            <button class="category-btn" data-category="sweaters">Sweaters</button>
+            <button class="category-btn" data-category="jackets">Jackets</button>
+            <button class="category-btn" data-category="pants">Pants</button>
+            <button class="category-btn" data-category="shorts">Shorts</button>
+        </div>
+    </header>
+
+  <!-- Products Grid -->
+  <div class="products-grid">
+    <!-- Hat Product (Best Seller) -->
+    <div class="product-card show" data-category="hats">
+        <div class="best-seller-badge">Best Seller</div>
+        <div class="product-image">
+            <img src="DSC_0161.jpeg" alt="Premium Hat">
+        </div>
+        <div class="product-details">
+            <h3 class="product-name">VISIONHEARTZ Premium Hat</h3>
+            <p class="product-price">$29.99</p>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+    <!-- Shirt Product -->
+    <div class="product-card show" data-category="shirts">
+        <div class="product-image">
+            <img src="DSC_0153.jpeg" alt="Classic Shirt">
+            <div class="coming-soon-overlay">
+                <div class="coming-soon-text">Coming Soon</div>
+            </div>
+        </div>
+        <div class="product-details">
+            <h3 class="product-name">Essential T-Shirt</h3>
+            <p class="product-price">Coming Soon</p>
+        </div>
+    </div>
+
+    <!-- Sweater Product -->
+    <div class="product-card show" data-category="sweaters">
+        <div class="product-image">
+            <img src="DSC_0153.jpeg" alt="Comfort Sweater">
+            <div class="coming-soon-overlay">
+                <div class="coming-soon-text">Coming Soon</div>
+            </div>
+        </div>
+        <div class="product-details">
+            <h3 class="product-name">Comfort Sweater</h3>
+            <p class="product-price">Coming Soon</p>
+        </div>
+    </div>
+
+    <!-- Additional Hat Product -->
+    <div class="product-card show" data-category="hats">
+        <div class="product-image">
+            <img src="DSC_0153.jpeg" alt="Classic Cap">
+        </div>
+        <div class="product-details">
+            <h3 class="product-name">Classic Baseball Cap</h3>
+            <p class="product-price">$24.99</p>
+        </div>
+        <button class="add-to-cart">Add to Cart</button>
+    </div>
+</div>
+
+<!-- Newsletter Banner -->
+<div class="newsletter-banner">
+    <span class="newsletter-banner-text">Be the first to know about new arrivals</span>
+    <a href="#" class="newsletter-banner-button">Sign up</a>
+</div>
+
+<script>
+    // Initialize GSAP ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animate header elements
+    gsap.to('.collections-title', {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: 'power2.out'
+    });
+
+    gsap.to('.collections-subtitle', {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: 0.2,
+        ease: 'power2.out'
+    });
+
+    gsap.to('.category-nav', {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: 0.4,
+        ease: 'power2.out'
+    });
+
+    // Animate product cards on scroll
+    const productCards = document.querySelectorAll('.product-card');
+    productCards.forEach((card, index) => {
+        gsap.to(card, {
+            scrollTrigger: {
+                trigger: card,
+                start: 'top bottom-=100',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            delay: index * 0.1,
+            ease: 'power2.out'
+        });
+    });
+
+    // Category filter functionality
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const products = document.querySelectorAll('.product-card');
+
+    categoryBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all buttons
+            categoryBtns.forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            btn.classList.add('active');
+            
+            const selectedCategory = btn.getAttribute('data-category');
+            
+            // Filter products
+            products.forEach(product => {
+                // Hide all products first
+                product.classList.remove('show');
+                
+                // Show products based on category
+                if (selectedCategory === 'all' || product.getAttribute('data-category') === selectedCategory) {
+                    // Add show class with a slight delay for animation
+                    setTimeout(() => {
+                        product.classList.add('show');
+                    }, 100);
+
+                    // Animate the products
+                    gsap.from(product, {
+                        opacity: 0,
+                        y: 20,
+                        duration: 0.4,
+                        ease: 'power2.out'
+                    });
+                }
+            });
+        });
+    });
+
+    // Animate coming soon text on hover
+    const comingSoonCards = document.querySelectorAll('.product-card:not([data-category="hats"])');
+    comingSoonCards.forEach(card => {
+        const text = card.querySelector('.coming-soon-text');
+        
+        card.addEventListener('mouseenter', () => {
+            gsap.to(text, {
+                opacity: 1,
+                y: 0,
+                duration: 0.4,
+                ease: 'power2.out'
+            });
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            gsap.to(text, {
+                opacity: 0,
+                y: 20,
+                duration: 0.4,
+                ease: 'power2.in'
+            });
+        });
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+</script>
+</body>
+</html>

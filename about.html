@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VISIONHEARTZ - Heart Big Vision Bigger</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&family=Italiana&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --primary-red: #FF3333;
+            --primary-black: #0A0A0A;
+            --secondary-black: #121212;
+            --text-white: #FFFFFF;
+            --text-gray: #888888;
+            --accent-color: #FF3333;
+            --gradient-1: linear-gradient(135deg, #FF3333 0%, #800020 100%);
+            --card-bg: rgba(18, 18, 18, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--primary-black);
+            color: var(--text-white);
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.6;
+        }
+
+        .announcement-banner {
+            background: var(--gradient-1);
+            color: var(--text-white);
+            text-align: center;
+            padding: 0.75rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 2000;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .announcement-banner span {
+            color: var(--text-white);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: rgba(10, 10, 10, 0.95);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            height: 80px;
+            top: 38px;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-family: 'Italiana', serif;
+            font-size: 1.75rem;
+            color: var(--text-white);
+            text-decoration: none;
+            letter-spacing: 3px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--primary-red);
+        }
+
+        .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.cart-icon {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-white);
+    position: relative;
+}
+
+.cart-icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+/* Remove the after pseudo-element for cart icon */
+.cart-icon::after {
+    display: none;
+}
+
+.cart-icon:hover {
+    color: var(--primary-red);
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--primary-red);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.15rem 0.4rem;
+    border-radius: 1rem;
+    min-width: 1.2rem;
+    text-align: center;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    /* Optionally, you might want to show the cart icon on mobile */
+    .cart-icon {
+        display: flex;
+    }
+
+    
+}
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-white);
+            font-weight: 500;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .about-section {
+            padding: 180px 5% 100px;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--primary-black);
+        }
+
+        .section-title {
+            font-family: 'Italiana', serif;
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        .motto {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text-white);
+            text-align: center;
+            letter-spacing: -0.02em;
+        }
+
+        .dictionary-entry {
+            margin-bottom: 3rem;
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .dictionary-entry:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .entry-content {
+            padding: 3rem;
+        }
+
+        .entry-image {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .entry-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 51, 51, 0.2), transparent);
+        }
+
+        .entry-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .dictionary-entry:hover .entry-image img {
+            transform: scale(1.1);
+        }
+
+        .word {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--primary-red);
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .pronunciation {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .part-of-speech {
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .definition {
+            color: var(--text-white);
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .example {
+            color: var(--text-gray);
+            font-style: italic;
+            margin-left: 1rem;
+            font-size: 1rem;
+            line-height: 1.6;
+            border-left: 2px solid var(--primary-red);
+            padding-left: 1rem;
+            background: rgba(255, 51, 51, 0.05);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .stay-connected {
+            text-align: center;
+            padding: 6rem 5%;
+            background: linear-gradient(to right, var(--secondary-black), rgba(255,51,51,0.1));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stay-connected::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="%23FF3333" fill-opacity="0.05"/></svg>');
+            opacity: 0.5;
+        }
+
+        .stay-connected h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-family: 'Italiana', serif;
+            position: relative;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1.25rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(18, 18, 18, 0.95);
+            color: white;
+            border-radius: 8px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--primary-red);
+            box-shadow: 0 0 0 3px rgba(255, 51, 51, 0.1);
+        }
+
+        .subscribe-btn {
+            padding: 1.25rem 2.5rem;
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .subscribe-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 51, 51, 0.2);
+        }
+
+        @media (max-width: 968px) {
+            .dictionary-entry {
+                grid-template-columns: 1fr;
+            }
+
+            .entry-image {
+                height: 300px;
+            }
+
+            .section-title {
+                font-size: 3rem;
+            }
+
+            .motto {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .motto {
+                font-size: 1.75rem;
+            }
+
+            .word {
+                font-size: 2rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .entry-content {
+                padding: 2rem;
+            }
+        }
+
+    /* Newsletter Banner */
+.newsletter-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    z-index: 1000;
+}
+
+.newsletter-banner-text {
+    color: var(--text-white);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.newsletter-banner-button {
+    background: var(--primary-red);
+    color: var(--text-white);
+    padding: 0.75rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.newsletter-banner-button:hover {
+    background: #cc2929;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+    .newsletter-banner {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        text-align: center;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="announcement-banner">
+        <span>Coming Soon</span> | Join the Waitlist for Exclusive Early Access
+    </div>
+
+  <!-- Navigation -->
+<nav class="navbar">
+    <a href="index.html" class="logo">VISIONHEARTZ</a>
+    <div class="nav-links">
+        <a href="collections.html">Collection</a>
+        <a href="about.html">Vision</a>
+        <a href="contact.html">Contact</a>
+        <a href="/cart" class="cart-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+            </svg>
+            <span class="cart-count">0</span>
+        </a>
+    </div>
+</nav>
+
+    <section class="about-section">
+        <h1 class="section-title">Our Vision</h1>
+        <div class="motto">Heart Big. Vision Bigger.</div>
+        <div class="part-of-speech">"Empowering your unique fashion journey, transforming clothing into a reflection of your personal story."</div>
+        
+        <div class="dictionary-entry">
+            <div class="entry-content">
+                <div class="word">pas·sion</div>
+                <div class="pronunciation">/ˈpaSH(ə)n/</div>
+                <div class="part-of-speech">noun</div>
+                <div class="definition">1. strong and barely controllable emotion.</div>
+                <div class="example">"a man of impetuous passion"</div>
+            </div>
+            <div class="entry-image">
+                <img src="IMG_1721.jpeg" alt="Passion illustration">
+            </div>
+        </div>
+
+        <div class="dictionary-entry">
+            <div class="entry-content">
+                <div class="word">ded·i·ca·tion</div>
+                <div class="pronunciation">/ˌdedəˈkāSH(ə)n/</div>
+                <div class="part-of-speech">noun</div>
+                <div class="definition">1. the quality of being dedicated or committed to a task or purpose.</div>
+                <div class="example">"his dedication to the cause of peace"</div>
+            </div>
+            <div class="entry-image">
+                <img src="IMG_1723.jpeg" alt="Dedication illustration">
+            </div>
+        </div>
+
+        <div class="dictionary-entry">
+            <div class="entry-content">
+                <div class="word">de·ter·mi·na·tion</div>
+                <div class="pronunciation">/dəˌtərməˈnāSH(ə)n/</div>
+                <div class="part-of-speech">noun</div>
+                <div class="definition">1. firmness of purpose; resoluteness.</div>
+                <div class="example">"pursuing one's goals with determination"</div>
+            </div>
+            <div class="entry-image">
+                <img src="IMG_1724.jpeg" alt="Determination illustration">
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Initial page load animations
+        window.addEventListener('load', () => {
+            // Fade in the navbar and announcement
+            gsap.from('.announcement-banner', {
+                y: -50,
+                opacity: 0,
+                duration: 1,
+                ease: 'power3.out'
+            });
+
+            gsap.from('.navbar', {
+                y: -50,
+                opacity: 0,
+                duration: 1,
+                delay: 0.3,
+                ease: 'power3.out'
+            });
+
+            // Animate the title and motto
+            gsap.from('.section-title', {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                delay: 0.5,
+                ease: 'power3.out'
+            });
+
+            gsap.from('.motto', {
+                y: 30,
+                opacity: 0,
+                duration: 1,
+                delay: 0.7,
+                ease: 'power3.out'
+            });
+
+            // Dictionary entries stagger animation
+            gsap.from('.dictionary-entry', {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                stagger: 0.3,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: '.about-section',
+                    start: 'top center+=100',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+
+            // Animate dictionary entry content on scroll
+            document.querySelectorAll('.dictionary-entry').forEach(entry => {
+                gsap.from(entry.querySelector('.word'), {
+                    x: -50,
+                    opacity: 0,
+                    duration: 0.8,
+                    scrollTrigger: {
+                        trigger: entry,
+                        start: 'top center+=100',
+                        toggleActions: 'play none none reverse'
+                    }
+                });
+
+                gsap.from(entry.querySelector('.definition'), {
+                    x: -30,
+                    opacity: 0,
+                    duration: 0.8,
+                    delay: 0.2,
+                    scrollTrigger: {
+                        trigger: entry,
+                        start: 'top center+=100',
+                        toggleActions: 'play none none reverse'
+                    }
+                });
+            });
+
+            // Stay connected section animation
+            gsap.from('.stay-connected', {
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: '.stay-connected',
+                    start: 'top center+=200',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+
+            gsap.from('.newsletter-form', {
+                opacity: 0,
+                y: 20,
+                duration: 1,
+                delay: 0.3,
+                scrollTrigger: {
+                    trigger: '.stay-connected',
+                    start: 'top center+=200',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    gsap.to(window, {
+                        duration: 1,
+                        scrollTo: {
+                            y: targetElement,
+                            offsetY: 100
+                        },
+                        ease: 'power3.inOut'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect for dictionary entry images
+        document.querySelectorAll('.entry-image').forEach(image => {
+            gsap.to(image.querySelector('img'), {
+                yPercent: 20,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: image,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: true
+                }
+            });
+        });
+    </script>
+
+<div class="newsletter-banner">
+    <span class="newsletter-banner-text">Be the first to know about new arrivals</span>
+    <a href="#" class="newsletter-banner-button">Sign up</a>
+</div>
+</body>
+</html>

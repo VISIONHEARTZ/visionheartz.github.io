@@ -1,0 +1,112 @@
+/* Reset some default styles */
+body, h1, h2, a, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #fff;
+    color: #000;
+  }
+  
+  /* Header styles */
+  .header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    z-index: 10;
+  }
+  
+  .header-left,
+  .header-center,
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .contact-link {
+    font-size: 14px;
+    text-decoration: none;
+    color: #000;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .icon-link {
+    margin-left: 20px;
+  }
+  
+  .icon-link img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .menu-icon {
+    margin-left: 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Main content styles */
+  .main-content {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 100px;
+  }
+  
+  .hero-section {
+    background-image: url('hero-background.jpg'); /* Replace with your background image */
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .hero-section h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .button-container {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .hero-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid #000;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .hero-button:hover {
+    background-color: #000;
+    color: #fff;
+  }
+  
