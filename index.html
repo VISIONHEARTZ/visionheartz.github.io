@@ -3,33 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VISIONHEARTZ - Heart Big Vision Bigger</title>
-    
-    <!-- External CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&family=Italiana&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
+    <title>Alpha Iota Chapter | Kappa Alpha Psi® Fraternity, Inc.</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Darker+Grotesque:wght@300;600;800&display=swap" rel="stylesheet">
+  
     <style>
-        /* Root Variables */
         :root {
-            --primary-red: #FF3333;
-            --primary-black: #0A0A0A;
-            --secondary-black: #121212;
-            --text-white: #FFFFFF;
-            --text-gray: #888888;
-            --gradient-1: linear-gradient(135deg, #FF3333 0%, #800020 100%);
-            --card-bg: rgba(18, 18, 18, 0.95);
+            --color-background: #121212;
+            --color-primary: #dc143c;
+            --color-text: #ffffff;
+            --transition: all 0.3s ease-in-out;
         }
 
-        /* Reset & Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -37,1150 +22,1314 @@
         }
 
         body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: var(--primary-black);
-            color: var(--text-white);
+            font-family: 'Darker Grotesque', sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
         /* Loading Screen */
-        .loading-screen {
+        .loader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--primary-black);
+            background: #000;
+            z-index: 9999;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 2000;
         }
 
-        .loading-logo {
-            font-family: 'Italiana', serif;
-            font-size: 3.5rem;
-            color: var(--text-white);
-            letter-spacing: 0.2em;
+        .loader-logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .loader-progress {
+            width: 200px;
+            height: 3px;
+            background: rgba(220, 20, 60, 0.2);
             position: relative;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        /* Background Video */
-        .background-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            z-index: 1;
             overflow: hidden;
         }
 
-        .background-video {
+        .loader-progress::after {
+            content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-        }
-
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
+            left: -50%;
+            width: 50%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 50%, rgba(255,51,51,0.2) 100%);
-            z-index: 2;
+            background: var(--color-primary);
+            animation: loading 1s ease infinite;
         }
 
-        .grain-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.075"/></svg>');
-            background-repeat: repeat;
-            opacity: 0.15;
-            z-index: 3;
-            pointer-events: none;
+        @keyframes loading {
+            0% { left: -50% }
+            100% { left: 100% }
         }
 
-        /* Announcement Banner */
-        .announcement-banner {
-            background: var(--gradient-1);
-            color: var(--text-white);
-            text-align: center;
-            padding: 0.75rem 5%;
+        /* Navigation */
+        .nav {
             position: fixed;
-            width: 100%;
             top: 0;
-            z-index: 2000;
-            font-size: 0.875rem;
-            font-weight: 500;
-            letter-spacing: 0.05em;
+            left: 0;
+            width: 100%;
+            background-color: transparent;
+            z-index: 1000;
+            padding: 1rem 0;
             backdrop-filter: blur(10px);
         }
 
-    /* Navigation */
-    . {
+        .nav-inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 5%;
-            background: rgba(10, 10, 10, 0.95);
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            top: 38px;
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            background: rgba(10, 10, 10, 0.98);
-            border-bottom: 1px solid rgba(255, 51, 51, 0.2);
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 90%;
         }
 
         .logo {
-            font-family: 'Italiana', serif;
-            font-size: 1.75rem;
-            color: var(--text-white);
             text-decoration: none;
-            letter-spacing: 3px;
-            transition: color 0.3s ease;
+            color: var(--color-text);
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
 
-        .logo:hover {
-            color: var(--primary-red);
-        }
-
-        .nav-links {
+        .menu {
             display: flex;
-            gap: 3rem;
-            align-items: center;
+            gap: 2rem;
         }
 
-        .nav-links a {
+        .menu-link {
             text-decoration: none;
-            color: var(--text-white);
-            font-weight: 500;
-            font-size: 0.875rem;
+            color: var(--color-text);
+            font-family: 'Syncopate', sans-serif;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            transition: var(--transition);
+            font-size: 0.9rem;
             position: relative;
-            padding: 0.5rem 0;
+            padding-bottom: 4px;
         }
 
-        .nav-links a::after {
+        .menu-link:after {
             content: '';
             position: absolute;
             width: 0;
             height: 2px;
             bottom: 0;
             left: 0;
-            background: var(--gradient-1);
-            transition: width 0.3s ease;
+            background-color: var(--color-primary);
+            transition: var(--transition);
         }
 
-        .nav-links a:hover::after {
+        .menu-link:hover:after {
             width: 100%;
         }
-
-       
 
         /* Hero Section */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
             position: relative;
-            z-index: 10;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-out;
+            z-index: 1;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            -webkit-transform-style: preserve-3d;
+        }
+
+        .hero-video.active {
+            opacity: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
+            z-index: 2;
         }
 
         .hero-content {
-            max-width: 800px;
-            margin-top: 80px;
-        }
-
-        .hero-eyebrow {
-            font-size: 1.125rem;
-            color: var(--primary-red);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .hero-title {
-            font-family: 'Italiana', serif;
-            font-size: 5rem;
-            line-height: 1.1;
-            margin-bottom: 2rem;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .hero-title span {
-            display: block;
-            color: var(--primary-red);
-        }
-
-        .hero-description {
-            font-size: 1.25rem;
-            color: rgba(255, 255, 255, 0.9);
-            max-width: 600px;
-            margin-bottom: 3rem;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .cta-primary {
-            padding: 1rem 2.5rem;
-            background: var(--gradient-1);
-            color: var(--text-white);
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            transition: all 0.3s ease;
-        }
-
-        .cta-secondary {
-            padding: 1rem 2.5rem;
-            background: transparent;
-            color: var(--text-white);
-            text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 4px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            transition: all 0.3s ease;
-        }
-
-        .cta-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 51, 51, 0.2);
-        }
-
-        .cta-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        /* Featured Section */
-        .featured-section {
-            padding: 8rem 5%;
             position: relative;
-            z-index: 10;
-            background: var(--secondary-black);
-        }
-
-        .featured-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .featured-card {
-            background: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .featured-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .featured-image {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
-
-        .featured-content {
+            z-index: 3;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
             padding: 2rem;
         }
 
-        .featured-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            font-family: 'Italiana', serif;
+        .fraternity-title {
+            margin-bottom: 2rem;
         }
 
-        .featured-description {
-            color: var(--text-gray);
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
+        .fraternity-title h2 {
+            font-family: 'Syncopate', sans-serif;
+            color: #DC143C;
+            text-shadow: 2px 2px 4px rgba(45, 17, 17, 0.5);
         }
 
-        .featured-link {
-            color: var(--primary-red);
-            text-decoration: none;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-size: 0.875rem;
+        .fraternity-title h3 {
+            font-family: 'Syncopate', sans-serif;
+            color: #d3d3d3;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        /* Newsletter Section */
-        .newsletter-section {
-            padding: 8rem 5%;
-            background: linear-gradient(to right, var(--primary-black), rgba(255,51,51,0.1));
+        .chapter-title h1 .chapter-letters {
+            color: var(--color-primary);
+        }
+
+        .chapter-title h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-subtitle {
+            font-family: 'Darker Grotesque', sans-serif;
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            color: var(--color-primary);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-info {
+            font-family: 'Darker Grotesque', sans-serif;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .polemarch-welcome {
+    padding: 8rem 2rem;
+    background-color: #000000;
+    position: relative;
+    overflow: hidden;
+}
+
+.polemarch-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 6rem;
+    align-items: center;
+}
+
+.polemarch-image-wrapper {
+    position: relative;
+    border: 1px solid rgba(220, 20, 60, 0.3);
+    transition: all 0.3s ease;
+}
+
+.polemarch-image {
+    width: 100%;
+    aspect-ratio: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.polemarch-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%) contrast(110%);
+    transition: all 0.6s ease;
+}
+
+.polemarch-content {
+    display: flex;
+    flex-direction: column;
+    gap: .0 rem;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.section-title {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 1rem;
+}
+
+.section-subtitle {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 1rem;
+    color: #dc143c;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-top: 0.5rem;
+}
+
+.polemarch-text {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 300;
+}
+
+.polemarch-name {
+    color: #dc143c;
+    font-weight: 500;
+}
+
+@media (max-width: 992px) {
+    .polemarch-welcome {
+        padding: 6rem 1.5rem;
+    }
+
+    .polemarch-container {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+    
+    .polemarch-image-wrapper {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .welcome-title {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+    
+    .welcome-subtitle {
+        text-align: center;
+    }
+    
+    .polemarch-text {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .polemarch-welcome {
+        padding: 4rem 1.5rem;
+    }
+    
+    .welcome-title {
+        font-size: 2rem;
+    }
+    
+    .polemarch-text {
+        font-size: 1rem;
+    }
+}
+
+        /* Mean Mugging Section Styles */
+        .mean-mugging {
+            background-color: #000;
+            padding: 4rem 0;
+            color: #fff;
+        }
+
+        .mean-mug-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .mug-card {
+    position: relative;
+    border: none; /* This will remove the border */
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+        .mug-card:hover {
+            transform: scale(1.02);
+        }
+
+        .mug-image {
             position: relative;
-            z-index: 10;
-            text-align: center;
+            aspect-ratio: 3/4;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .newsletter-title {
-            font-family: 'Italiana', serif;
-            font-size: 3rem;
-            color: var(--text-white);
-            margin-bottom: 1.5rem;
-        }
-
-        .newsletter-description {
-            color: var(--text-gray);
-            font-size: 1.1rem;
-            margin-bottom: 2.5rem;
-            line-height: 1.6;
-        }
-
-        .newsletter-form {
-            display: flex;
-            gap: 1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .newsletter-input {
-            flex: 1;
-            padding: 1.25rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            color: var(--text-white);
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .newsletter-input:focus {
-            outline: none;
-            border-color: var(--primary-red);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .newsletter-button {
-            padding: 1.25rem 2.5rem;
-            background: var(--gradient-1);
-            color: var(--text-white);
-            border: none;
-            border-radius: 4px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 500;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .newsletter-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 51, 51, 0.2);
-        }
-
-        /* Music Player */
-        .music-player {
-            position: fixed;
-            bottom: 50%;
-            right: 2rem;
-            z-index: 1000;
-            cursor: move;
-            cursor: grab;
-            transform: none;
-        }
-
-        .music-player:active {
-            cursor: grabbing;
-        }
-
-        .player-container {
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 0.75rem;
-            padding: 0.75rem;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            width: fit-content;
-        }
-
-        .play-button {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 50%;
-            background: var(--primary-red);
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .play-button svg {
-            width: 1rem;
-            height: 1rem;
-            fill: white;
-        }
-
-        .track-info {
-            display: flex;
-            flex-direction: column;
-            gap: 0.15rem;
-        }
-
-        .now-playing {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-        }
-
-        .pulse-dot {
-            width: 0.35rem;
-            height: 0.35rem;
-            background: var(--primary-red);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        .now-playing-text {
-            font-size: 0.75rem;
-            color: white;
-            font-weight: 500;
-            letter-spacing: 0.05em;
-        }
-
-        .producer-name {
-            font-size: 0.65rem;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .progress-bar {
-            width: 8rem;
-            height: 0.2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 1rem;
-            overflow: hidden;
-            margin-top: 0.25rem;
-        }
-
-        .progress {
-            width: 0%;
+        .mug-image img {
+            width: 100%;
             height: 100%;
-            background: var(--primary-red);
-            transition: width 0.1s linear;
+            object-fit: cover;
+            filter: contrast(110%) grayscale(50%);
         }
 
-        /* Newsletter Banner */
-        .newsletter-banner {
-            position: fixed;
+        .brother-info {
+            position: absolute;
             bottom: 0;
             left: 0;
-            width: 100%;
-            background: var(--card-bg);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
+            right: 0;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem;
+            text-align: center;
         }
 
-        .newsletter-banner-text {
-            color: var(--text-white);
-            font-size: 0.9rem;
-            letter-spacing: 0.05em;
-        }
-
-        .newsletter-banner-button {
-            padding: 0.5rem 1.5rem;
-            background: var(--gradient-1);
-            color: var(--text-white);
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            text-transform: uppercase;
+        .line-name {
+            font-family: 'Syncopate', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #CD1010;
             letter-spacing: 0.1em;
-            transition: all 0.3s ease;
+            display: block;
         }
 
-        .newsletter-banner-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 51, 51, 0.2);
+        .line-year {
+            font-family: 'Darker Grotesque', sans-serif;
+            font-size: 0.9rem;
+            color: #fff;
+            display: block;
+            margin-top: 0.5rem;
         }
 
-        /* Footer */
-        .footer {
-            background: var(--primary-black);
-            padding: 5rem 5%;
-            position: relative;
-            z-index: 10;
+        /* About Section Styles */
+        .about {
+            padding: 4rem 0;
+            background: #000;
         }
 
-        .footer-container {
-            max-width: 1400px;
+        .section-title {
+            font-family: 'Syncopate', sans-serif;
+            color: #fff;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .about-content {
+            max-width: 1000px;
             margin: 0 auto;
+            padding: 0 1rem;
         }
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-        }
-
-        .footer-column h3 {
-            color: var(--text-white);
+        .about-text {
+            text-align: center;
+            margin-bottom: 3rem;
             font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            font-weight: 500;
+            color: #fff;
         }
 
-        .footer-links {
-            list-style: none;
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
         }
 
-        .footer-links li {
+        .stat {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .stat-label {
+            display: block;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.8rem;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* Achievement Section */
+        .achievement {
+            padding: 4rem 0;
+            background: #000;
+            text-align: center;
+        }
+
+        .achievement-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .achievement-title {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--color-primary);
+            margin-bottom: 2rem;
+        }
+
+        .achievement-text {
+            margin-top: 3rem;
+        }
+
+        .achievement-text h2 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.5rem;
+            color: #fff;
             margin-bottom: 1rem;
         }
 
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-size: 0.9rem;
+        .achievement-text p {
+            font-size: 1.1rem;
+            color: #fff;
+            opacity: 0.9;
         }
 
-        .footer-links a:hover {
-            color: var(--primary-red);
+        /* Diamond Footer Styles */
+        .footer {
+            background: rgba(18, 18, 18, 0.95);
+            padding: 3rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(220, 20, 60, 0.1);
         }
 
-        .designer-credit {
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
-            padding: 2rem 0;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.875rem;
-            color: rgba(255, 255, 255, 0.7);
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+            gap: 1.2rem;
         }
 
-        .designer-text {
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.1em;
-        }
-
-        .signature-container {
-            display: inline-flex;
+        .diamond-container {
             position: relative;
-            font-family: 'Space Mono', monospace;
-            color: var(--primary-red);
-            font-size: 1.5rem;
-            padding: 0.5rem;
-            background: rgba(255, 0, 0, 0.1);
-            border-radius: 4px;
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+            width: 60px;
+            height: 60px;
+            transform-style: preserve-3d;
+            animation: rotate 12s linear infinite;
         }
 
-        .signature {
-            border-right: 2px solid var(--primary-red);
-            animation: typing 3s steps(5, end) infinite,
-                       blink 0.75s step-end infinite;
-            white-space: nowrap;
-            overflow: hidden;
-            width: 0;
+        .diamond {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            background: linear-gradient(45deg, var(--color-primary), #ff1a1a);
+            transform-style: preserve-3d;
+            filter: drop-shadow(0 0 10px rgba(220, 20, 60, 0.5));
         }
+
+        .diamond::before {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .diamond::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2));
+        }
+
+        .glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--color-primary);
+            filter: blur(20px);
+            opacity: 0.3;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .achievers-text {
+            font-family: 'Darker Grotesque', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+            color: var(--color-text);
+            opacity: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid var(--color-primary);
+            animation: typing 3.5s steps(40, end), 
+                       blink-caret 0.75s step-end infinite,
+                       fade-in 0.5s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        /* Video Container and Transitions */
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-out;
+  z-index: 1;
+}
+
+.hero-video.active {
+  opacity: 1;
+}
+
+.diamond-transition {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: linear-gradient(45deg, var(--color-primary), #ff1a1a);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  transform: translate(-50%, -50%) scale(0);
+  transition: all 0.8s ease;
+  z-index: 3;
+}
+
+.diamond-transition.active {
+  width: 200%;
+  height: 200%;
+  transform: translate(-50%, -50%) scale(1);
+}
 
         /* Animations */
-        @keyframes typing {
-            0% { width: 0 }
-            50% { width: 5ch }
-            75% { width: 5ch }
-            85% { width: 0 }
-            100% { width: 0 }
-        }
-
-        @keyframes blink {
-            from, to { border-color: transparent }
-            50% { border-color: var(--primary-red) }
-        }
-
-        @keyframes glitch {
-            0% { transform: translateX(0) }
-            5% { transform: translateX(2px) }
-            10% { transform: translateX(-2px) }
-            15% { transform: translateX(0) }
-            100% { transform: translateX(0) }
+        @keyframes rotate {
+            0% {
+                transform: rotateY(0deg) rotateX(15deg);
+            }
+            100% {
+                transform: rotateY(360deg) rotateX(15deg);
+            }
         }
 
         @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.1);
+            }
         }
 
-        /* Media Queries */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-    }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
 
-    .hero-title {
-        font-size: 3.5rem;
-    }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--color-primary) }
+        }
 
-    .featured-grid {
-        grid-template-columns: 1fr;
-    }
+        @keyframes fade-in {
+            from { opacity: 0 }
+            to { opacity: 0.9 }
+        }
 
-    .footer-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-    
-    .signature {
-        font-size: 0.7rem; /* Reduced size */
-    }
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-inner {
+                flex-direction: column;
+                text-align: center;
+            }
 
-    .music-player {
-        bottom: 1rem;
-        right: 1rem;
-    }
-    
-    .track-info {
-        display: none;
-    }
+            .menu {
+                margin-top: 1rem;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
 
-    .newsletter-form {
-        flex-direction: column;
-    }
+            .polemarch-welcome {
+                flex-direction: column;
+                gap: 2rem;
+            }
 
-    .newsletter-button {
-        width: 100%;
-    }
+            .polemarch-image {
+                width: 200px;
+                height: 200px;
+            }
 
-    /* Announcement banner */
-    .announcement-banner {
-        font-size: 0.75rem;
-        padding: 0.5rem 1rem;
-    }
+            .polemarch-title {
+                font-size: 2rem;
+            }
 
-    /* Navbar spacing */
-    .navbar {
-        padding: 1rem;
-        top: 32px;
-    }
+            .polemarch-text {
+                font-size: 1rem;
+            }
+        }
 
-    /* CTA buttons */
-    .cta-buttons {
-        flex-direction: column;
-        width: 100%;
-    }
+        .designer-credit {
+            margin-top: 2rem;
+            font-family: 'Darker Grotesque', sans-serif;
+            font-size: 1rem;
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-    .cta-primary, .cta-secondary {
-        width: 100%;
-        text-align: center;
-    }
+        .designer-name {
+            font-family: 'Dancing Script', cursive;
+            color: var(--color-primary);
+            font-size: 1.4rem;
+            position: relative;
+            display: inline-block;
+        }
 
-    /* Newsletter section */
-    .newsletter-section {
-        padding: 4rem 1rem;
-    }
+        .designer-name::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-background);
+            border-left: 2px solid var(--color-primary);
+            animation: typing 3s steps(6, end) forwards,
+                     blink-caret 0.75s step-end infinite;
+            animation-delay: 2s;
+        }
 
-    .newsletter-title {
-        font-size: 2rem;
-    }
+        @keyframes typing {
+            to {
+                width: 0;
+            }
+        }
 
-    /* Loading screen */
-    .loading-logo {
-        font-size: 2rem;
-        letter-spacing: 0.1em;
-    }
+        .designer-credit {
+            margin-top: 2rem;
+            font-family: 'Darker Grotesque', sans-serif;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-    /* Designer credit - updated sizes */
-    .designer-credit {
-        padding: 0.75rem;
-    }
+        .graffiti-text {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 2rem;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(220, 20, 60, 0.2);
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(45deg, var(--color-primary), #ff3366);
+            background-clip: text;
+            -webkit-background-clip: text;
+            background-size: 200%;
+            animation: spray-paint 4s forwards;
+            opacity: 0;
+        }
 
-    .designer-text {
-        font-size: 0.6rem;
-        margin-bottom: 0.2rem;
-    }
+        .graffiti-text::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: radial-gradient(circle at 50% 50%, 
+                rgba(220, 20, 60, 0.2) 0%, 
+                transparent 70%);
+            opacity: 0;
+            animation: spray-mist 4s forwards;
+            pointer-events: none;
+        }
 
-    .signature-container {
-        font-size: 0.7rem;
-        padding: 0.2rem;
-    }
+        @keyframes spray-paint {
+            0% {
+                opacity: 0;
+                transform: scale(0.95);
+                filter: blur(4px);
+            }
+            10% {
+                opacity: 0.3;
+                transform: scale(1);
+                filter: blur(2px);
+            }
+            30% {
+                opacity: 0.5;
+                filter: blur(1px);
+            }
+            100% {
+                opacity: 1;
+                filter: blur(0);
+                text-shadow: 2px 2px 4px rgba(220, 20, 60, 0.3);
+            }
+        }
+
+        .social-links {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            color: var(--color-text);
+            font-size: 1.5rem;
+            opacity: 0.7;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .social-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--color-primary);
+            bottom: -5px;
+            left: 0;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--color-primary);
+            opacity: 1;
+        }
+
+        .social-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .glow-letter {
+            color: red;
+            text-shadow: 0 0 5px red,
+                         0 0 10px red,
+                         0 0 15px red,
+                         0 0 20px red;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px red,
+                             0 0 10px red,
+                             0 0 15px red,
+                             0 0 20px red;
+            }
+            to {
+                text-shadow: 0 0 10px red,
+                             0 0 20px red,
+                             0 0 30px red,
+                             0 0 40px red;
+            }
+        }
+
+        @keyframes spray-mist {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            20% {
+                opacity: 0.8;
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.2);
+            }
+        }
+
+        .red-text {
+    color: var(--color-primary);
 }
 
-/* Small devices */
-@media (max-width: 375px) {
-    .loading-logo {
-        font-size: 1.75rem;
-    }
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            perspective: 1000;
+            -webkit-perspective: 1000;
+        }
 
-    .signature-container {
-        font-size: 0.6rem;
-    }
+        
 
-    .designer-text {
-        font-size: 0.5rem;
-    }
-
-    .signature {
-        font-size: 0.6rem;
-    }
-}
-</style>
+    </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen">
-        <div class="loading-logo">VISIONHEARTZ</div>
-    </div>
-
-    <!-- Background Video -->
-    <div class="background-container">
-        <video class="background-video" autoplay muted loop playsinline>
-            <source src="Snapinsta.app_video_AQN5LY6H2D70OfHUTkLqrJj8HpZXx-jJ2SU8FTARDZfAUsmBUaANSnLCdeodFbOpuGpN01OFyiZjPeYXpCp8L_2Z8jAfCEJV1I3yLV8 (1).mp4" type="video/mp4">
-        </video>
-        <div class="overlay"></div>
-        <div class="grain-overlay"></div>
-    </div>
-
-    <!-- Announcement Banner -->
-    <div class="announcement-banner">
-        End of season markdowns. <span>Get up to 10% off select styles.</span>
+    <!-- Loading Screen -->  
+    <div class="loader">
+        <img src="KAPsiCrest (4).png" alt="Kappa Alpha Psi Crest" class="loader-logo">
+        <div class="loader-progress"></div>
     </div>
 
     <!-- Navigation -->
-    <nav class="navbar">
-        <a href="index.html" class="logo">VISIONHEARTZ</a>
-        <button class="mobile-menu-btn">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <div class="nav-links">
-            <a href="collections.html">Collection</a>
-            <a href="about.html">Vision</a>
-            <a href="contact.html">Contact</a>
-            <a href="faq.html">Faq</a>
-           
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="logo">
+                <span class="fraternity-name">ΚΑΨ</span>
+                <span class="chapter-name">ALPHA IOTA</span>
+            </a>
+            <div class="menu">
+                <a href="about.html" class="menu-link">ABOUT</a>
+                <a href="brothers.html" class="menu-link">BROTHERS</a>
+                <a href="media.html" class="menu-link">CHAPTER MEDIA</a>
+                <a href="brothers.html" class="menu-link">BROTHERS ONLY</a>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <main class="hero">
+        <div class="hero-bg">
+            <!-- Video Montage -->
+            <div class="video-container">
+                <video class="hero-video active" autoplay muted loop playsinline>
+                    <source src="szn.mp4" type="video/mp4">
+                </video>
+                <video class="hero-video" autoplay muted loop playsinline>
+                    <source src="videoplayback.mp4" type="video/mp4">
+                </video>
+                <video class="hero-video" autoplay muted loop playsinline>
+                    <source src="videoplayback (1).mp4" type="video/mp4">
+                </video>
+                <video class="hero-video" autoplay muted loop playsinline>
+                    <source src="videoplayback (2).mp4" type="video/mp4">
+                </video>
+            </div>
+            <!-- Dark Overlay -->
+            <div class="hero-overlay"></div>
+        </div>
+
+        <!-- Hero Content -->
         <div class="hero-content">
-            <div class="hero-eyebrow">Welcome to VISIONHEARTZ</div>
-            <h1 class="hero-title">Heart Big.<br><span>Vision Bigger.</span></h1>
-            <p class="hero-description">At VISIONHEARTZ, we believe in empowering your unique fashion journey, transforming clothing into a reflection of your personal story.</p>
-            <div class="cta-buttons">
-                <a href="collections.html" class="cta-primary">Shop Collection</a>
-                <a href="about.html" class="cta-secondary">Our Vision</a>
+            <div class="fraternity-title">
+                <h2>KAPPA ALPHA PSI®</h2>
+                <h3>FRATERNITY, INCORPORATED</h3>
+                <h3>PRESENTS</h3>
+            </div>
+            <div class="chapter-title">
+                <h1>
+                    <span class="title-animation">
+                        <span class="stamp-letter">A</span>LPH<span class="stamp-letter">A</span>
+                    </span>
+                    <span class="title-animation">
+                        <span class="stamp-letter">I</span>OT<span class="stamp-letter">A</span>
+                    </span>
+                    <span class="chapter-letters">(AI)</span>
+                </h1>
+                <div class="chapter-subtitle">THE MOST NOTORIOUS CHAPTER</div>
+            </div>
+            <div class="hero-info">
+                <p>Morgan State University · Baltimore, MD</p>
+                <p>Chartered May 29, 1931</p>
             </div>
         </div>
-    </section>
+    </main>
 
-    <!-- Featured Section -->
-    <section class="featured-section">
-        <div class="featured-grid">
-            <div class="featured-card">
-                <img src="IMG_1721.jpeg" alt="New Collection" class="featured-image">
-                <div class="featured-content">
-                    <h3 class="featured-title">New Collection</h3>
-                    <p class="featured-description">Explore our latest pieces that blend style with purpose.</p>
-                    <a href="collections.html" class="featured-link">Discover More →</a>
-                </div>
-            </div>
-            <div class="featured-card">
-                <img src="DSC_0161.jpeg" alt="Designer Series" class="featured-image">
-                <div class="featured-content">
-                    <h3 class="featured-title">Designer Series</h3>
-                    <p class="featured-description">Limited edition pieces curated for the bold and visionary.</p>
-                    <a href="collections.html" class="featured-link">View Collection →</a>
-                </div>
-            </div>
-            <div class="featured-card">
-                <img src="IMG_1724.jpeg" alt="Accessories" class="featured-image">
-                <div class="featured-content">
-                    <h3 class="featured-title">Accessories</h3>
-                    <p class="featured-description">Complete your look with our signature accessories.</p>
-                    <a href="collections.html" class="featured-link">Shop Now →</a>
-                </div>
+    <!-- Polemarch's Welcome Section -->
+<!-- Polemarch's Welcome Section -->
+<!-- Polemarch's Welcome Section -->
+<section class="polemarch-welcome">
+    <div class="polemarch-container">
+        <div class="">
+            <div class="polemarch-image">
+                <img src="ley.jpg" alt="Polemarch Godley Pierre">
             </div>
         </div>
-    </section>
-
-  <!-- Newsletter Section -->
-  <section class="newsletter-section">
+        <div class="polemarch-content">
+            <div class="section-header">
+                <h2 class="section-title">Polemarch's Welcome</h2>
+            </div>
+            <div>
+                <p class="polemarch-text">
+                    Greetings to all who have come to learn more about "THE NOTORIOUS" Alpha Iota Chapter of Kappa Alpha Psi Fraternity, Inc. As the current Polemarch, I, <span class="polemarch-name">(1AI23FA) Godley Pierre</span>, am honored to welcome you to our beloved chapter.
+                </p>
+                <br>
+                <p class="polemarch-text">
+                    Our brothers are trailblazers, innovators, and visionaries who have made indelible marks in their respective fields. From Grand Chapter Officers to Province Leaders, the Alpha Iota Chapter continues to embody the ideals of Kappa Alpha Psi and inspire the next generation of change-makers and won't stop at anything to <span class="polemarch-name">ACHIEVE</span>...
+                </p>
+                <br>
+               
+            </div>
+        </div>
+    </div>
+<!-- Mean Mugging Section -->
+<section class="mean-mugging">
     <div class="container">
-        <h2 class="newsletter-title">Stay In The Loop</h2>
-        <p class="newsletter-description">Subscribe to our newsletter for exclusive updates, early access to new collections, and special offers.</p>
-        <form id="newsletterForm" class="newsletter-form">
-            <input type="email" id="newsletterEmail" class="newsletter-input" placeholder="Enter your email" required>
-            <button type="submit" class="newsletter-button">Subscribe</button>
-        </form>
+        <h2 class="section-title">BROTHER SPOTLIGHT </h2>
+        <div class="mean-mug-grid">
+            <!-- Recent Line Photo -->
+            <div class="mug-card">
+                <div class="mug-image">
+                    <img src="https://www.kappaalphapsi1911.com/wp-content/uploads/2023/11/29th-htutman.jpg" alt="Recent Line Mean Mugging" alt="Recent Line Mean Mugging">
+                    <div class="brother-info">
+                        <span class="line-name">Howard L. Tutman, Jr.</span>
+                        <span class="line-year">29th Grand Polemarch</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mug-card">
+                <div class="mug-image">
+                    <img src="https://media.licdn.com/dms/image/v2/D4E03AQEqEL7HWgv1xA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1667310331726?e=1744243200&v=beta&t=k-EIxM8SoKo3p5XWQeqytWW0g_lG5wAqRloSdmRY8Kg" alt="Spring Line Mean Mugging">
+                    <div class="brother-info">
+                        <span class="line-name">Enyinna O. Anthony</span>
+                        <span class="line-year">44th Guy Levis Grant Awardee</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Older Line Photo -->
+            <div class="mug-card">
+                <div class="mug-image">
+                    <img src="https://media.licdn.com/dms/image/v2/D4E03AQFTDqBdwlalkw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1675480873091?e=1744243200&v=beta&t=KvkPoaQjVe5nOVEbXIVNjmCHeFbT7rPznm5CGBs_esY" alt="Older Line Mean Mugging">
+                    <div class="brother-info">
+                        <span class="line-name">Dr. Marvin D. Carr</span>
+                        <span class="line-year">68th Guy Levis Grant Awardee</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Line Photo -->
+           
+        </div>
     </div>
 </section>
+    <!-- Mean Mugging Section -->
+    <section class="mean-mugging">
+        <div class="container">
+            <h2 class="section-title">RECENT LINES </h2>
+            <div class="mean-mug-grid">
+                <!-- Recent Line Photo -->
+                <div class="mug-card">
+                    <div class="mug-image">
+                        <img src="welcome.jpg" alt="Recent Line Mean Mugging">
+                        <div class="brother-info">
+                            <span class="line-name">"11 SURVIVORS OF DESTRUKTION"</span>
+                            <span class="line-year">FALL '24</span>
+                        </div>
+                    </div>
+                </div>
 
-<script>
-    document.getElementById('newsletterForm').addEventListener('submit', function(event) {
-        event.preventDefault();
+                <!-- Older Line Photo -->
+                <div class="mug-card">
+                    <div class="mug-image">
+                        <img src="kappa.jpg" alt="Older Line Mean Mugging">
+                        <div class="brother-info">
+                            <span class="line-name">" 5 Kombatants of Katastrophe"</span>
+                            <span class="line-year">FALL '23</span>
+                        </div>
+                    </div>
+                </div>
 
-        // Collect email
-        const email = document.getElementById('newsletterEmail').value;
-
-        // Prepare Gmail draft URL
-        const gmailDraftUrl = 
-            `https://mail.google.com/mail/?view=cm&fs=1&to=vhapparel1@gmail.com&su=${encodeURIComponent('Newsletter Subscription')}&body=${encodeURIComponent(
-            `Newsletter Subscription Request\n\n` +
-            `Email: ${email}\n\n` +
-            `Please add this email to our newsletter mailing list.`
-        )}`;
-
-        // Open Gmail draft
-        window.open(gmailDraftUrl, '_blank');
-
-        // Optional: Show confirmation to user
-        alert('Thank you for subscribing! A draft email has been prepared.');
-
-        // Reset form
-        this.reset();
-    });
-</script>
-
-<!-- Music Player -->
-<div class="music-player">
-    <div class="player-container">
-        <button class="play-button" id="playButton">
-            <svg viewBox="0 0 24 24" class="play-icon">
-                <path d="M8 5v14l11-7z"/>
-            </svg>
-            <svg viewBox="0 0 24 24" class="pause-icon" style="display: none;">
-                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-            </svg>
-        </button>
-        <div class="track-info">
-            <div class="now-playing">
-                <div class="pulse-dot"></div>
-                <a  class="now-playing-text" target="_blank">Now Playing</a>
-            </div>
-            <a href="https://www.youtube.com/@triplestackz3x_" class="producer-name" target="_blank">"Alone" By 3X</a>
-            <div class="progress-bar">
-                <div class="progress" id="progress"></div>
+                <!-- New Line Photo -->
+                <div class="mug-card">
+                    <div class="mug-image">
+                        <img src="sp23.jpg" alt="Spring Line Mean Mugging">
+                        <div class="brother-info">
+                            <span class="line-name">"The 5 Adversaries of Anarchy"</span>
+                            <span class="line-year">SPRING '23</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <audio id="audio" src="Chill Type Beat - Alone.mp3" preload="auto"></audio>
-    </div>
-</div>
+    </section>
 
-    <!-- Newsletter Banner -->
-  
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <h3>Help</h3>
-                    <ul class="footer-links">
-                        <li><a href="contact.html">Contact us</a></li>
-                        <li><a href="faq.html">FAQs</a></li>
-                        <li><a href="faq.html">Shipping</a></li>
-                        <li><a href="faq.html">Returns</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Shop</h3>
-                    <ul class="footer-links">
-                        <li><a href="collections.html">New Arrivals</a></li>
-                        <li><a href="collections.html">Tops</a></li>
-                        <li><a href="collections.html">Bottoms</a></li>
-                        <li><a href="collections.html">Accessories</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>About</h3>
-                    <ul class="footer-links">
-                        <li><a href="about.html">Vision</a></li>
-                        <li><a href="contact.html">Ambassador</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Connect</h3>
-                    <ul class="footer-links">
-                        <li><a href="https://www.instagram.com/vh_hbvb/">Instagram</a></li>
-                        <li><a href="https://x.com/visionheartz/status/1822000159682925003">Twitter</a></li>
-                        <li><a href="https://www.tiktok.com/@visionheartz">TikTok</a></li>
-                    </ul>
+    <section class="mean-mugging">
+        <div class="container">
+            <h2 class="section-title">RECENT GRADUATES</h2>
+            <div class="mean-mug-grid">
+                <!-- Recent Line -->
+             <!-- Fall '23 Line -->
+             <div class="mug-card">
+                <div class="instagram-embed">
+                    <blockquote 
+                        class="instagram-media" 
+                        data-instgrm-permalink="https://www.instagram.com/p/C7eemn0RJ1y/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+                        data-instgrm-version="14"
+                        style="background:#000; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+                    </blockquote>
                 </div>
             </div>
-            <div class="designer-credit">
-                <div class="designer-text">designed by</div>
-                <div class="signature-container">
-                    <div class="signature">reezy</div>
+    
+                <!-- Fall '23 Line -->
+                <div class="mug-card">
+                    <div class="instagram-embed">
+                        <blockquote 
+                            class="instagram-media" 
+                            data-instgrm-permalink="https://www.instagram.com/p/CsT5icEunma/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+                            data-instgrm-version="14"
+                            style="background:#000; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+                        </blockquote>
+                    </div>
                 </div>
+    
+                <!-- Spring '23 Line -->
+                <div class="mug-card">
+                    <div class="instagram-embed">
+                        <blockquote 
+                            class="instagram-media" 
+                            data-instgrm-permalink="https://www.instagram.com/p/Csou7udxFbT/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+                            data-instgrm-version="14"
+                            style="background:#000; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mean-mugging">
+        <div class="container" style="overflow-x: auto; white-space: nowrap;">
+            <h2 class="section-title">ACTIVE BROTHERS</h2>
+            <div class="mean-mug-grid" style="display: inline-flex; flex-wrap: nowrap; min-width: max-content;">
+                <!-- Fall 24 Brothers -->
+                <div class="mug-card" style="width: 300px;">
+                    <div class="mug-image" style="height: 400px; background: #000;">
+                        <svg viewBox="0 0 100 100" style="width: 100px; height: 100px; margin: auto; display: block; position: relative; top: 50%; transform: translateY(-50%);">
+                            <polygon points="50,0 100,50 50,100 0,50" fill="#8B0000" style="filter: drop-shadow(0 0 10px #8B0000);">
+                                <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="8s" repeatCount="indefinite"/>
+                            </polygon>
+                        </svg>
+                        <div class="brother-info">
+                            <span class="line-name">Kamron Laron Hampton</span>
+                            <span class="line-year">"NoKturnal" • 0AI24FA</span>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Repeat structure for each brother -->
+                <div class="mug-card" style="width: 300px;">
+                    <div class="mug-image" style="height: 400px; background: #000;">
+                        <svg viewBox="0 0 100 100" style="width: 100px; height: 100px; margin: auto; display: block; position: relative; top: 50%; transform: translateY(-50%);">
+                            <polygon points="50,0 100,50 50,100 0,50" fill="#8B0000" style="filter: drop-shadow(0 0 10px #8B0000);">
+                                <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="8s" repeatCount="indefinite"/>
+                            </polygon>
+                        </svg>
+                        <div class="brother-info">
+                            <span class="line-name">Jaden Kofi Koranteng</span>
+                            <span class="line-year">"Kronk" • 1AI24FA</span>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Continue pattern for all Fall 24 brothers -->
+    
+                <!-- Fall 23 Brothers -->
+                <div class="mug-card" style="width: 300px;">
+                    <div class="mug-image" style="height: 400px; background: #000;">
+                        <svg viewBox="0 0 100 100" style="width: 100px; height: 100px; margin: auto; display: block; position: relative; top: 50%; transform: translateY(-50%);">
+                            <polygon points="50,0 100,50 50,100 0,50" fill="#8B0000" style="filter: drop-shadow(0 0 10px #8B0000);">
+                                <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="8s" repeatCount="indefinite"/>
+                            </polygon>
+                        </svg>
+                        <div class="brother-info">
+                            <span class="line-name">Corey Green</span>
+                            <span class="line-year">"Kardiak" • 0AI23FA</span>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Continue for all brothers -->
+
+                   <!-- Fall 23 Brothers -->
+                   <div class="mug-card" style="width: 300px;">
+                    <div class="mug-image" style="height: 400px; background: #000;">
+                        <svg viewBox="0 0 100 100" style="width: 100px; height: 100px; margin: auto; display: block; position: relative; top: 50%; transform: translateY(-50%);">
+                            <polygon points="50,0 100,50 50,100 0,50" fill="#8B0000" style="filter: drop-shadow(0 0 10px #8B0000);">
+                                <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="8s" repeatCount="indefinite"/>
+                            </polygon>
+                        </svg>
+                        <div class="brother-info">
+                            <span class="line-name">Corey Green</span>
+                            <span class="line-year">"Kardiak" • 0AI23FA</span>
+                        </div>
+                    </div>
+                </div>
+
+                   <!-- Fall 23 Brothers -->
+                   <div class="mug-card" style="width: 300px;">
+                    <div class="mug-image" style="height: 400px; background: #000;">
+                        <svg viewBox="0 0 100 100" style="width: 100px; height: 100px; margin: auto; display: block; position: relative; top: 50%; transform: translateY(-50%);">
+                            <polygon points="50,0 100,50 50,100 0,50" fill="#8B0000" style="filter: drop-shadow(0 0 10px #8B0000);">
+                                <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="8s" repeatCount="indefinite"/>
+                            </polygon>
+                        </svg>
+                        <div class="brother-info">
+                            <span class="line-name">Corey Green</span>
+                            <span class="line-year">"Kardiak" • 0AI23FA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  
+
+    <!-- Instagram Embed Script -->
+    <script async src="//www.instagram.com/embed.js"></script>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Achievers of the Impossible</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Historically "ACHIEVERS OF" of collegiate leadership in Kappa Alpha Psi®, the Alpha Iota Chapter has set the standard for achievement, brotherhood, and excellence since 1931.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat">
+                        <span class="stat-label">ESTABLISHED</span>
+                        <span class="stat-number">1931</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">INTERNATIONAL CHAPTER OF THE YEAR</span>
+                        <span class="stat-number">2009</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievement Section -->
+    <section class="achievement">
+        <div class="achievement-content">
+            <h2 class="achievement-title">ACHIEVEMENT IN EVERY FIELD OF HUMAN ENDEAVOUR</h2>
+            <div class="achievement-text">
+                <h2>A TRADITION OF EXCELLENCE</h2>
+                <p>From Grand Chapter Officers to Province Leadership, AI Chapter continues to exemplify the values and ideals of Kappa Alpha Psi® Fraternity, Inc.</p>
+                <a href="/history" class="explore-link"></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="diamond-container">
+                <div class="glow"></div>
+                <div class="diamond"></div>
+            </div>
+            <div class="achievers-text">
+                <span class="glow-letter">A</span>chievers of the <span class="glow-letter">I</span>mpossible
+            </div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/ainupes1931/?hl=en" class="social-link" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/people/The-Alpha-Iota-Chapter-of-%CE%9A%CE%91%CE%A8/100067518272851/" class="social-link" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://x.com/AINupes1931/status/1801345234472997026" class="social-link" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+            <div class="designer-credit">
+                designed by <span class="graffiti-text">reezy</span>
             </div>
         </div>
     </footer>
 
     <script>
-        // Initialize GSAP
+        // Loading screen functionality
+        window.addEventListener('load', function() {
+            const loader = document.querySelector('.loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 1500);
 
-    // Initialize GSAP ScrollTrigger
-    gsap.registerPlugin(ScrollTrigger);
+            // Video montage functionality
+            const videos = document.querySelectorAll('.hero-video');
+            let currentVideo = 0;
 
-// Loading Screen Animation
-window.addEventListener('load', () => {
-    gsap.to('.loading-logo', {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power2.out'
-    });
-
-    setTimeout(() => {
-        gsap.to('.loading-screen', {
-            opacity: 0,
-            duration: 1,
-            ease: 'power2.inOut',
-            onComplete: () => {
-                document.querySelector('.loading-screen').style.display = 'none';
-                startPageAnimations();
+            function setRandomTime(video) {
+                const duration = video.duration;
+                if (duration) {
+                    const randomTime = Math.floor(Math.random() * (duration - 5));
+                    video.currentTime = randomTime;
+                }
             }
+
+            // Initialize videos
+            videos.forEach(video => {
+                video.addEventListener('loadedmetadata', () => {
+                    setRandomTime(video);
+                });
+            });
+
+            function switchVideo() {
+                // Hide current video
+                videos[currentVideo].classList.remove('active');
+                
+                // Switch to next video
+                currentVideo = (currentVideo + 1) % videos.length;
+                videos[currentVideo].classList.add('active');
+                setRandomTime(videos[currentVideo]);
+            }
+
+            // Start the video switching
+            setInterval(switchVideo, 5000); // Switch every 5 seconds
         });
-    }, 1500);
-});
-
-// Start page animations
-function startPageAnimations() {
-    gsap.to('.hero-eyebrow', {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power2.out'
-    });
-
-    gsap.to('.hero-title', {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        delay: 0.3,
-        ease: 'power2.out'
-    });
-
-    gsap.to('.hero-description', {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        delay: 0.6,
-        ease: 'power2.out'
-    });
-
-    gsap.to('.cta-buttons', {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        delay: 0.9,
-        ease: 'power2.out'
-    });
-}
-
-// Featured Cards Animation
-gsap.from('.featured-card', {
-    opacity: 0,
-    y: 50,
-    duration: 1,
-    stagger: 0.2,
-    scrollTrigger: {
-        trigger: '.featured-section',
-        start: 'top 80%',
-        end: 'bottom bottom',
-        toggleActions: 'play none none reverse'
-    }
-});
-
-// Music Player Functionality
-const playerContainer = document.querySelector('.player-container');
-const playButton = document.getElementById('playButton');
-const audio = document.getElementById('audio');
-const progress = document.getElementById('progress');
-const playIcon = document.querySelector('.play-icon');
-const pauseIcon = document.querySelector('.pause-icon');
-
-let isPlaying = false;
-let isDragging = false;
-let currentX;
-let currentY;
-let initialX;
-let initialY;
-let xOffset = 0;
-let yOffset = 0;
-
-playButton.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (isPlaying) {
-        audio.pause();
-        playIcon.style.display = 'block';
-        pauseIcon.style.display = 'none';
-    } else {
-        audio.play();
-        playIcon.style.display = 'none';
-        pauseIcon.style.display = 'block';
-    }
-    isPlaying = !isPlaying;
-});
-
-audio.addEventListener('timeupdate', () => {
-    const progressPercent = (audio.currentTime / audio.duration) * 100;
-    progress.style.width = progressPercent + '%';
-});
-
-audio.addEventListener('ended', () => {
-    isPlaying = false;
-    playIcon.style.display = 'block';
-    pauseIcon.style.display = 'none';
-    progress.style.width = '0%';
-});
-
-// Draggable Music Player
-playerContainer.addEventListener('mousedown', dragStart);
-document.addEventListener('mousemove', drag);
-document.addEventListener('mouseup', dragEnd);
-
-playerContainer.addEventListener('touchstart', dragStart);
-document.addEventListener('touchmove', drag);
-document.addEventListener('touchend', dragEnd);
-
-function dragStart(e) {
-    if (e.type === 'touchstart') {
-        initialX = e.touches[0].clientX - xOffset;
-        initialY = e.touches[0].clientY - yOffset;
-    } else {
-        initialX = e.clientX - xOffset;
-        initialY = e.clientY - yOffset;
-    }
-
-    if (e.target === playerContainer) {
-        isDragging = true;
-    }
-}
-
-function drag(e) {
-    if (isDragging) {
-        e.preventDefault();
-
-        if (e.type === 'touchmove') {
-            currentX = e.touches[0].clientX - initialX;
-            currentY = e.touches[0].clientY - initialY;
-        } else {
-            currentX = e.clientX - initialX;
-            currentY = e.clientY - initialY;
-        }
-
-        xOffset = currentX;
-        yOffset = currentY;
-
-        setTranslate(currentX, currentY, document.querySelector('.music-player'));
-    }
-}
-
-function setTranslate(xPos, yPos, el) {
-    el.style.transform = `translate(${xPos}px, ${yPos}px)`;
-}
-
-function dragEnd() {
-    initialX = currentX;
-    initialY = currentY;
-    isDragging = false;
-}
-
-// Navbar scroll effect
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-});
-// Add this to your existing script section
-const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-const navLinks = document.querySelector('.nav-links');
-
-mobileMenuBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    
-    // Animate menu button
-    const spans = mobileMenuBtn.getElementsByTagName('span');
-    spans[0].classList.toggle('rotate-45');
-    spans[1].classList.toggle('opacity-0');
-    spans[2].classList.toggle('-rotate-45');
-});
-
-// Close menu when clicking a link
-const navLinksAnchors = document.querySelectorAll('.nav-links a');
-navLinksAnchors.forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-    });
-});
-
-// Close menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-        navLinks.classList.remove('active');
-    }
-});
-</script>
+    </script>
 </body>
 </html>
