@@ -131,7 +131,7 @@
         }
 
     /* Navigation */
-    .navbar {
+    . {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -196,38 +196,7 @@
             width: 100%;
         }
 
-        .cart-icon {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: var(--text-white);
-            margin-left: 2rem;
-            position: relative;
-        }
-
-        .cart-icon svg {
-            width: 1.5rem;
-            height: 1.5rem;
-            transition: color 0.3s ease;
-        }
-
-        .cart-icon:hover svg {
-            color: var(--primary-red);
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: var(--primary-red);
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 500;
-            padding: 0.15rem 0.4rem;
-            border-radius: 1rem;
-            min-width: 1.2rem;
-            text-align: center;
-        }
+       
 
         /* Hero Section */
         .hero {
@@ -737,7 +706,40 @@
                 width: 100%;
             }
         }
-    </style>
+        @media (max-width: 768px) {
+    /* Adjust announcement banner */
+    .announcement-banner {
+        font-size: 0.75rem;
+        padding: 0.5rem 1rem;
+    }
+
+    /* Fix navbar spacing */
+    .navbar {
+        padding: 1rem;
+        top: 32px; /* Adjusted for smaller announcement banner */
+    }
+
+    /* Make CTA buttons stack on mobile */
+    .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .cta-primary, .cta-secondary {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Adjust newsletter section padding */
+    .newsletter-section {
+        padding: 4rem 1rem;
+    }
+
+    .newsletter-title {
+        font-size: 2rem;
+    }
+}
+</style>
 </head>
 <body>
     <!-- Loading Screen -->
@@ -756,22 +758,23 @@
 
     <!-- Announcement Banner -->
     <div class="announcement-banner">
-        End of season markdowns. <span>Get up to 30% off select styles.</span>
+        End of season markdowns. <span>Get up to 10% off select styles.</span>
     </div>
 
     <!-- Navigation -->
     <nav class="navbar">
         <a href="index.html" class="logo">VISIONHEARTZ</a>
+        <button class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <div class="nav-links">
             <a href="collections.html">Collection</a>
             <a href="about.html">Vision</a>
             <a href="contact.html">Contact</a>
-            <a href="/cart" class="cart-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                </svg>
-                <span class="cart-count">0</span>
-            </a>
+            <a href="faq.html">Faq</a>
+           
         </div>
     </nav>
 
@@ -796,7 +799,7 @@
                 <div class="featured-content">
                     <h3 class="featured-title">New Collection</h3>
                     <p class="featured-description">Explore our latest pieces that blend style with purpose.</p>
-                    <a href="#" class="featured-link">Discover More →</a>
+                    <a href="collections.html" class="featured-link">Discover More →</a>
                 </div>
             </div>
             <div class="featured-card">
@@ -804,7 +807,7 @@
                 <div class="featured-content">
                     <h3 class="featured-title">Designer Series</h3>
                     <p class="featured-description">Limited edition pieces curated for the bold and visionary.</p>
-                    <a href="#" class="featured-link">View Collection →</a>
+                    <a href="collections.html" class="featured-link">View Collection →</a>
                 </div>
             </div>
             <div class="featured-card">
@@ -812,54 +815,77 @@
                 <div class="featured-content">
                     <h3 class="featured-title">Accessories</h3>
                     <p class="featured-description">Complete your look with our signature accessories.</p>
-                    <a href="#" class="featured-link">Shop Now →</a>
+                    <a href="collections.html" class="featured-link">Shop Now →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Newsletter Section -->
-    <section class="newsletter-section">
-        <div class="container">
-            <h2 class="newsletter-title">Stay In The Loop</h2>
-            <p class="newsletter-description">Subscribe to our newsletter for exclusive updates, early access to new collections, and special offers.</p>
-            <form class="newsletter-form">
-                <input type="email" class="newsletter-input" placeholder="Enter your email" required>
-                <button type="submit" class="newsletter-button">Subscribe</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Music Player -->
-    <div class="music-player">
-        <div class="player-container">
-            <button class="play-button" id="playButton">
-                <svg viewBox="0 0 24 24" class="play-icon">
-                    <path d="M8 5v14l11-7z"/>
-                </svg>
-                <svg viewBox="0 0 24 24" class="pause-icon" style="display: none;">
-                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-                </svg>
-            </button>
-            <div class="track-info">
-                <div class="now-playing">
-                    <div class="pulse-dot"></div>
-                    <span class="now-playing-text">Now Playing</span>
-                </div>
-                <span class="producer-name">"Alone" By 3X</span>
-                <div class="progress-bar">
-                    <div class="progress" id="progress"></div>
-                </div>
-            </div>
-            <audio id="audio" src="Chill Type Beat - Alone.mp3" preload="auto"></audio>
-        </div>
+  <!-- Newsletter Section -->
+  <section class="newsletter-section">
+    <div class="container">
+        <h2 class="newsletter-title">Stay In The Loop</h2>
+        <p class="newsletter-description">Subscribe to our newsletter for exclusive updates, early access to new collections, and special offers.</p>
+        <form id="newsletterForm" class="newsletter-form">
+            <input type="email" id="newsletterEmail" class="newsletter-input" placeholder="Enter your email" required>
+            <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
     </div>
+</section>
+
+<script>
+    document.getElementById('newsletterForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Collect email
+        const email = document.getElementById('newsletterEmail').value;
+
+        // Prepare Gmail draft URL
+        const gmailDraftUrl = 
+            `https://mail.google.com/mail/?view=cm&fs=1&to=vhapparel1@gmail.com&su=${encodeURIComponent('Newsletter Subscription')}&body=${encodeURIComponent(
+            `Newsletter Subscription Request\n\n` +
+            `Email: ${email}\n\n` +
+            `Please add this email to our newsletter mailing list.`
+        )}`;
+
+        // Open Gmail draft
+        window.open(gmailDraftUrl, '_blank');
+
+        // Optional: Show confirmation to user
+        alert('Thank you for subscribing! A draft email has been prepared.');
+
+        // Reset form
+        this.reset();
+    });
+</script>
+
+<!-- Music Player -->
+<div class="music-player">
+    <div class="player-container">
+        <button class="play-button" id="playButton">
+            <svg viewBox="0 0 24 24" class="play-icon">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+            <svg viewBox="0 0 24 24" class="pause-icon" style="display: none;">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
+        </button>
+        <div class="track-info">
+            <div class="now-playing">
+                <div class="pulse-dot"></div>
+                <a  class="now-playing-text" target="_blank">Now Playing</a>
+            </div>
+            <a href="https://www.youtube.com/@triplestackz3x_" class="producer-name" target="_blank">"Alone" By 3X</a>
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+        </div>
+        <audio id="audio" src="Chill Type Beat - Alone.mp3" preload="auto"></audio>
+    </div>
+</div>
 
     <!-- Newsletter Banner -->
-    <div class="newsletter-banner">
-        <span class="newsletter-banner-text">Be the first to know about new arrivals</span>
-        <a href="#" class="newsletter-banner-button">Sign up</a>
-    </div>
+  
 
     <!-- Footer -->
     <footer class="footer">
@@ -868,42 +894,39 @@
                 <div class="footer-column">
                     <h3>Help</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Contact us</a></li>
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">Shipping</a></li>
-                        <li><a href="#">Returns</a></li>
+                        <li><a href="contact.html">Contact us</a></li>
+                        <li><a href="faq.html">FAQs</a></li>
+                        <li><a href="faq.html">Shipping</a></li>
+                        <li><a href="faq.html">Returns</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Shop</h3>
                     <ul class="footer-links">
-                        <li><a href="#">New Arrivals</a></li>
-                        <li><a href="#">Tops</a></li>
-                        <li><a href="#">Bottoms</a></li>
-                        <li><a href="#">Accessories</a></li>
+                        <li><a href="collections.html">New Arrivals</a></li>
+                        <li><a href="collections.html">Tops</a></li>
+                        <li><a href="collections.html">Bottoms</a></li>
+                        <li><a href="collections.html">Accessories</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>About</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Our Story</a></li>
-                        <li><a href="#">Vision</a></li>
-                        <li><a href="#">Press</a></li>
-                        <li><a href="#">Careers</a></li>
+                        <li><a href="about.html">Vision</a></li>
+                        <li><a href="contact.html">Ambassador</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Connect</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Newsletter</a></li>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">TikTok</a></li>
+                        <li><a href="https://www.instagram.com/vh_hbvb/">Instagram</a></li>
+                        <li><a href="https://x.com/visionheartz/status/1822000159682925003">Twitter</a></li>
+                        <li><a href="https://www.tiktok.com/@visionheartz">TikTok</a></li>
                     </ul>
                 </div>
             </div>
             <div class="designer-credit">
-                <div class="designer-text">website by</div>
+                <div class="designer-text">designed by</div>
                 <div class="signature-container">
                     <div class="signature">reezy</div>
                 </div>
@@ -1089,6 +1112,34 @@ window.addEventListener('scroll', () => {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
+    }
+});
+// Add this to your existing script section
+const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+const navLinks = document.querySelector('.nav-links');
+
+mobileMenuBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    
+    // Animate menu button
+    const spans = mobileMenuBtn.getElementsByTagName('span');
+    spans[0].classList.toggle('rotate-45');
+    spans[1].classList.toggle('opacity-0');
+    spans[2].classList.toggle('-rotate-45');
+});
+
+// Close menu when clicking a link
+const navLinksAnchors = document.querySelectorAll('.nav-links a');
+navLinksAnchors.forEach(link => {
+    link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+    });
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        navLinks.classList.remove('active');
     }
 });
 </script>
