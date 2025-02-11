@@ -668,58 +668,57 @@
         }
 
         /* Media Queries */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
 
-            .hero-title {
-                font-size: 3.5rem;
-            }
+    .hero-title {
+        font-size: 3.5rem;
+    }
 
-            .featured-grid {
-                grid-template-columns: 1fr;
-            }
+    .featured-grid {
+        grid-template-columns: 1fr;
+    }
 
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            
-            .signature {
-                font-size: 3rem;
-            }
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .signature {
+        font-size: 0.7rem; /* Reduced size */
+    }
 
-            .music-player {
-                bottom: 1rem;
-                right: 1rem;
-            }
-            
-            .track-info {
-                display: none;
-            }
+    .music-player {
+        bottom: 1rem;
+        right: 1rem;
+    }
+    
+    .track-info {
+        display: none;
+    }
 
-            .newsletter-form {
-                flex-direction: column;
-            }
+    .newsletter-form {
+        flex-direction: column;
+    }
 
-            .newsletter-button {
-                width: 100%;
-            }
-        }
-        @media (max-width: 768px) {
-    /* Adjust announcement banner */
+    .newsletter-button {
+        width: 100%;
+    }
+
+    /* Announcement banner */
     .announcement-banner {
         font-size: 0.75rem;
         padding: 0.5rem 1rem;
     }
 
-    /* Fix navbar spacing */
+    /* Navbar spacing */
     .navbar {
         padding: 1rem;
-        top: 32px; /* Adjusted for smaller announcement banner */
+        top: 32px;
     }
 
-    /* Make CTA buttons stack on mobile */
+    /* CTA buttons */
     .cta-buttons {
         flex-direction: column;
         width: 100%;
@@ -730,7 +729,7 @@
         text-align: center;
     }
 
-    /* Adjust newsletter section padding */
+    /* Newsletter section */
     .newsletter-section {
         padding: 4rem 1rem;
     }
@@ -738,44 +737,45 @@
     .newsletter-title {
         font-size: 2rem;
     }
-}
-@media (max-width: 768px) {
-    /* Adjust loading screen */
+
+    /* Loading screen */
     .loading-logo {
-        font-size: 2rem; /* Reduced from 3.5rem */
-        letter-spacing: 0.1em; /* Reduced letter spacing */
+        font-size: 2rem;
+        letter-spacing: 0.1em;
     }
 
-    /* Adjust designer credit */
+    /* Designer credit - updated sizes */
     .designer-credit {
-        padding: 1rem;
+        padding: 0.75rem;
     }
 
     .designer-text {
-        font-size: 0.75rem; /* Smaller text */
-        margin-bottom: 0.25rem;
+        font-size: 0.6rem;
+        margin-bottom: 0.2rem;
     }
 
     .signature-container {
-        font-size: 1rem; /* Reduced from 1.5rem */
-        padding: 0.25rem; /* Smaller padding */
-    }
-
-    .signature {
-        /* Adjust the typing animation width for mobile */
-        animation: typing 3s steps(5, end) infinite,
-                  blink 0.75s step-end infinite;
+        font-size: 0.7rem;
+        padding: 0.2rem;
     }
 }
 
-/* Even smaller devices */
+/* Small devices */
 @media (max-width: 375px) {
     .loading-logo {
-        font-size: 1.75rem; /* Even smaller on very small devices */
+        font-size: 1.75rem;
     }
 
     .signature-container {
-        font-size: 0.875rem;
+        font-size: 0.6rem;
+    }
+
+    .designer-text {
+        font-size: 0.5rem;
+    }
+
+    .signature {
+        font-size: 0.6rem;
     }
 }
 </style>
