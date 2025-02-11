@@ -406,6 +406,46 @@ body, h1, h2, a, button {
       font-size: 1rem;
   }
 
+@media (max-width: 768px) {
+    /* Adjust loading screen */
+    .loading-logo {
+        font-size: 2rem; /* Reduced from 3.5rem */
+        letter-spacing: 0.1em; /* Reduced letter spacing */
+    }
+
+    /* Adjust designer credit */
+    .designer-credit {
+        padding: 1rem;
+    }
+
+    .designer-text {
+        font-size: 0.75rem; /* Smaller text */
+        margin-bottom: 0.25rem;
+    }
+
+    .signature-container {
+        font-size: 1rem; /* Reduced from 1.5rem */
+        padding: 0.25rem; /* Smaller padding */
+    }
+
+    .signature {
+        /* Adjust the typing animation width for mobile */
+        animation: typing 3s steps(5, end) infinite,
+                  blink 0.75s step-end infinite;
+    }
+}
+
+/* Even smaller devices */
+@media (max-width: 375px) {
+    .loading-logo {
+        font-size: 1.75rem; /* Even smaller on very small devices */
+    }
+
+    .signature-container {
+        font-size: 0.875rem;
+    }
+}
+
   .footer-grid {
       grid-template-columns: 1fr;
   }
