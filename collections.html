@@ -38,7 +38,6 @@
             overflow-x: hidden;
         }
 
-        /* Announcement Banner */
         .announcement-banner {
             background: var(--gradient-1);
             color: var(--text-white);
@@ -52,9 +51,16 @@
             font-weight: 500;
             letter-spacing: 0.05em;
             backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Navigation */
+        .announcement-banner span {
+            color: var(--text-white);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -64,10 +70,10 @@
             position: fixed;
             width: 100%;
             z-index: 1000;
+            height: 80px;
             top: 38px;
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
         }
 
         .logo {
@@ -85,7 +91,7 @@
 
         .nav-links {
             display: flex;
-            gap: 3rem;
+            gap: 2.5rem;
             align-items: center;
         }
 
@@ -115,40 +121,8 @@
             width: 100%;
         }
 
-        .cart-icon {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: var(--text-white);
-            margin-left: 2rem;
-            position: relative;
-        }
+      
 
-        .cart-icon svg {
-            width: 1.5rem;
-            height: 1.5rem;
-            transition: color 0.3s ease;
-        }
-
-        .cart-icon:hover svg {
-            color: var(--primary-red);
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: var(--primary-red);
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 500;
-            padding: 0.15rem 0.4rem;
-            border-radius: 1rem;
-            min-width: 1.2rem;
-            text-align: center;
-        }
-
-        /* Collections Header */
         .collections-header {
             padding: 180px 5% 80px;
             text-align: center;
@@ -163,18 +137,6 @@
             transform: translateY(30px);
         }
 
-        .collections-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-gray);
-            margin-bottom: 3rem;
-            opacity: 0;
-            transform: translateY(30px);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Category Navigation */
         .category-nav {
             display: flex;
             justify-content: center;
@@ -204,7 +166,6 @@
             border-color: transparent;
         }
 
-        /* Products Grid */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -215,115 +176,17 @@
         }
 
         .product-card {
-            position: relative;
             background: var(--card-bg);
             border-radius: 8px;
             overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease;
             opacity: 0;
             transform: translateY(30px);
-            display: none;
-            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .product-card.show {
-            display: block;
-        }
-
-        .product-image {
-            position: relative;
-            width: 100%;
-            padding-top: 125%;
-            overflow: hidden;
-        }
-
-        .product-image img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .product-card:hover .product-image img {
-            transform: scale(1.05);
-        }
-
-        .product-card:not([data-category="hats"]) .product-image img {
-            filter: blur(5px);
-        }
-
-        .coming-soon-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .coming-soon-text {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-white);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.4s ease;
-        }
-
-        .product-card:not([data-category="hats"]):hover .coming-soon-overlay {
-            opacity: 1;
-        }
-
-        .product-card:not([data-category="hats"]):hover .coming-soon-text {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .product-details {
-            padding: 1.5rem;
-        }
-
-        .product-name {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .product-price {
-            color: var(--primary-red);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .add-to-cart {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 1rem;
-            background: var(--gradient-1);
-            color: var(--text-white);
-            border: none;
-            cursor: pointer;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .product-card[data-category="hats"]:hover .add-to-cart {
-            transform: translateY(0);
+        .product-card:hover {
+            transform: translateY(-5px);
         }
 
         .best-seller-badge {
@@ -340,7 +203,52 @@
             letter-spacing: 0.05em;
         }
 
-        /* Newsletter Banner */
+        .product-image {
+            position: relative;
+            width: 100%;
+            padding-top: 125%;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .coming-soon-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-card:hover .coming-soon-overlay {
+            opacity: 1;
+        }
+
+        .coming-soon-text {
+            color: var(--text-white);
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .product-details {
+            padding: 2rem;
+        }
+
         .newsletter-banner {
             position: fixed;
             bottom: 0;
@@ -361,7 +269,6 @@
             color: var(--text-white);
             font-size: 0.9rem;
             letter-spacing: 0.05em;
-            font-weight: 500;
         }
 
         .newsletter-banner-button {
@@ -383,6 +290,10 @@
         }
 
         @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
             .collections-title {
                 font-size: 2.5rem;
             }
@@ -390,10 +301,6 @@
             .category-nav {
                 flex-wrap: wrap;
                 gap: 1rem;
-            }
-
-            .nav-links {
-                display: none;
             }
 
             .products-grid {
@@ -412,7 +319,7 @@
 <body>
     <!-- Announcement Banner -->
     <div class="announcement-banner">
-        End of season markdowns. <span>Get up to 30% off select styles.</span>
+        <span>Coming Soon</span> | Join the Waitlist for Exclusive Early Access
     </div>
 
     <!-- Navigation -->
@@ -422,7 +329,8 @@
             <a href="collections.html">Collection</a>
             <a href="about.html">Vision</a>
             <a href="contact.html">Contact</a>
-            <a href="/cart" class="cart-icon">
+            <a href="faq.html">Faq</a>
+            <a href="cart.html" class="cart-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
@@ -434,197 +342,227 @@
     <!-- Collections Header -->
     <header class="collections-header">
         <h1 class="collections-title">Our Collections</h1>
-        <p class="collections-subtitle">Elevate your style with our carefully curated selections, designed for those who dare to dream bigger.</p>
-        
-        <!-- Category Navigation -->
         <div class="category-nav">
             <button class="category-btn active" data-category="all">All</button>
             <button class="category-btn" data-category="hats">Hats</button>
-            <button class="category-btn" data-category="shirts">Shirts</button>
-            <button class="category-btn" data-category="sweaters">Sweaters</button>
-            <button class="category-btn" data-category="jackets">Jackets</button>
-            <button class="category-btn" data-category="pants">Pants</button>
-            <button class="category-btn" data-category="shorts">Shorts</button>
+            <button class="category-btn" data-category="coming-soon">Coming Soon</button>
         </div>
     </header>
 
-  <!-- Products Grid -->
-  <div class="products-grid">
-    <!-- Hat Product (Best Seller) -->
-    <div class="product-card show" data-category="hats">
-        <div class="best-seller-badge">Best Seller</div>
-        <div class="product-image">
-            <img src="DSC_0161.jpeg" alt="Premium Hat">
-        </div>
-        <div class="product-details">
-            <h3 class="product-name">VISIONHEARTZ Premium Hat</h3>
-            <p class="product-price">$29.99</p>
-        </div>
-        <button class="add-to-cart">Add to Cart</button>
-    </div>
-
-    <!-- Shirt Product -->
-    <div class="product-card show" data-category="shirts">
-        <div class="product-image">
-            <img src="DSC_0153.jpeg" alt="Classic Shirt">
-            <div class="coming-soon-overlay">
-                <div class="coming-soon-text">Coming Soon</div>
+    <!-- Products Grid -->
+    <div class="products-grid">
+        <!-- Shopify Buy Button Product -->
+        <div class="product-card" data-category="hats">
+            <div class="best-seller-badge">Best Seller</div>
+            <div class="product-details">
+                <div id='product-component-1738110326378'></div>
             </div>
         </div>
-        <div class="product-details">
-            <h3 class="product-name">Essential T-Shirt</h3>
-            <p class="product-price">Coming Soon</p>
-        </div>
-    </div>
 
-    <!-- Sweater Product -->
-    <div class="product-card show" data-category="sweaters">
-        <div class="product-image">
-            <img src="DSC_0153.jpeg" alt="Comfort Sweater">
-            <div class="coming-soon-overlay">
-                <div class="coming-soon-text">Coming Soon</div>
+        <!-- Coming Soon Products -->
+      
+
+        <div class="product-card" data-category="coming-soon">
+            <div class="product-image">
+                <img src="IMG_2415_(1).jpg" alt="VISIONHEARTZ Sweatshirt" style="filter: blur(5px);">
+                <div class="coming-soon-overlay">
+                    <div class="coming-soon-text">Coming Soon</div>
+                </div>
+            </div>
+            <div class="product-details">
+                <h3>VISIONHEARTZ Sweatshirt</h3>
+                <p>Coming Soon</p>
             </div>
         </div>
-        <div class="product-details">
-            <h3 class="product-name">Comfort Sweater</h3>
-            <p class="product-price">Coming Soon</p>
+
+        <div class="product-card" data-category="coming-soon">
+            <div class="product-image">
+                <img src="IMG_2415_(1).jpg" alt="VISIONHEARTZ Sweatpants" style="filter: blur(5px);">
+                <div class="coming-soon-overlay">
+                    <div class="coming-soon-text">Coming Soon</div>
+                </div>
+            </div>
+            <div class="product-details">
+                <h3>VISIONHEARTZ Sweatpants</h3>
+                <p>Coming Soon</p>
+            </div>
         </div>
     </div>
 
-    <!-- Additional Hat Product -->
-    <div class="product-card show" data-category="hats">
-        <div class="product-image">
-            <img src="DSC_0153.jpeg" alt="Classic Cap">
-        </div>
-        <div class="product-details">
-            <h3 class="product-name">Classic Baseball Cap</h3>
-            <p class="product-price">$24.99</p>
-        </div>
-        <button class="add-to-cart">Add to Cart</button>
-    </div>
-</div>
 
-<!-- Newsletter Banner -->
-<div class="newsletter-banner">
-    <span class="newsletter-banner-text">Be the first to know about new arrivals</span>
-    <a href="#" class="newsletter-banner-button">Sign up</a>
-</div>
-
-<script>
-    // Initialize GSAP ScrollTrigger
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Animate header elements
-    gsap.to('.collections-title', {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power2.out'
-    });
-
-    gsap.to('.collections-subtitle', {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        delay: 0.2,
-        ease: 'power2.out'
-    });
-
-    gsap.to('.category-nav', {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        delay: 0.4,
-        ease: 'power2.out'
-    });
-
-    // Animate product cards on scroll
-    const productCards = document.querySelectorAll('.product-card');
-    productCards.forEach((card, index) => {
-        gsap.to(card, {
-            scrollTrigger: {
-                trigger: card,
-                start: 'top bottom-=100',
-                toggleActions: 'play none none reverse'
-            },
+    <!-- Shopify Buy Button Script -->
+<script type="text/javascript">
+    /*<![CDATA[*/
+    (function () {
+      var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+      if (window.ShopifyBuy) {
+        if (window.ShopifyBuy.UI) {
+          ShopifyBuyInit();
+        } else {
+          loadScript();
+        }
+      } else {
+        loadScript();
+      }
+    
+      function loadScript() {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = scriptURL;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+        script.onload = ShopifyBuyInit;
+      }
+    
+      function ShopifyBuyInit() {
+        var client = ShopifyBuy.buildClient({
+          domain: '3ce50c-53.myshopify.com',
+          storefrontAccessToken: '887c74fb1b3d138a5a1f6e6571015f3d',
+        });
+    
+        ShopifyBuy.UI.onReady(client).then(function (ui) {
+          ui.createComponent('product', {
+            id: '7907473293511',
+            node: document.getElementById('product-component-1738110326378'),
+            moneyFormat: '%24%7B%7Bamount%7D%7D',
+            options: {
+              "product": {
+                "styles": {
+                  "product": {
+                    "@media (min-width: 601px)": {
+                      "max-width": "100%",
+                      "margin-left": "0",
+                      "margin-bottom": "0"
+                    }
+                  },
+                  "title": {
+                    "font-family": "Quantico Bold, Helvetica Neue, sans-serif",
+                    "font-size": "1.2rem",
+                    "color": "#FFFFFF",
+                    "font-weight": "500",
+                    "text-transform": "uppercase",
+                    "letter-spacing": "0.1em"
+                  },
+                  "price": {
+                    "font-family": "Helvetica Neue, sans-serif",
+                    "color": "#FF3333",
+                    "font-size": "1.1rem",
+                    "margin-top": "0.5rem"
+                  },
+                  "button": {
+                    ":hover": {
+                      "background": "linear-gradient(135deg, #FF3333 0%, #800020 100%)",
+                      "transform": "translateY(-2px)",
+                      "box-shadow": "0 8px 20px rgba(255, 51, 51, 0.2)"
+                    },
+                    "background": "linear-gradient(135deg, #FF3333 0%, #800020 100%)",
+                    ":focus": {
+                      "background": "linear-gradient(135deg, #FF3333 0%, #800020 100%)"
+                    },
+                    "border-radius": "4px",
+                    "padding": "1rem 2.5rem",
+                    "font-family": "Helvetica Neue, sans-serif",
+                    "font-weight": "500",
+                    "text-transform": "uppercase",
+                    "letter-spacing": "0.1em",
+                    "transition": "all 0.3s ease",
+                    "margin-top": "1rem"
+                  }
+                }
+              },
+              "cart": {
+                "styles": {
+                  "button": {
+                    ":hover": {
+                      "background": "linear-gradient(135deg, #FF3333 0%, #800020 100%)",
+                      "transform": "translateY(-2px)"
+                    },
+                    "background": "linear-gradient(135deg, #FF3333 0%, #800020 100%)"
+                  }
+                },
+                "text": {
+                  "total": "Subtotal",
+                  "button": "Checkout"
+                }
+              }
+            }
+          });
+        });
+      }
+    })();
+    /*]]>*/
+    </script>
+    
+    <!-- GSAP Animations -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+    
+        // Animate header elements
+        gsap.to('.collections-title', {
             opacity: 1,
             y: 0,
-            duration: 0.6,
-            delay: index * 0.1,
+            duration: 1,
             ease: 'power2.out'
         });
-    });
-
-    // Category filter functionality
-    const categoryBtns = document.querySelectorAll('.category-btn');
-    const products = document.querySelectorAll('.product-card');
-
-    categoryBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Remove active class from all buttons
-            categoryBtns.forEach(b => b.classList.remove('active'));
-            // Add active class to clicked button
-            btn.classList.add('active');
-            
-            const selectedCategory = btn.getAttribute('data-category');
-            
-            // Filter products
-            products.forEach(product => {
-                // Hide all products first
-                product.classList.remove('show');
-                
-                // Show products based on category
-                if (selectedCategory === 'all' || product.getAttribute('data-category') === selectedCategory) {
-                    // Add show class with a slight delay for animation
-                    setTimeout(() => {
-                        product.classList.add('show');
-                    }, 100);
-
-                    // Animate the products
-                    gsap.from(product, {
-                        opacity: 0,
-                        y: 20,
-                        duration: 0.4,
-                        ease: 'power2.out'
-                    });
+    
+        gsap.to('.category-nav', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.2,
+            ease: 'power2.out'
+        });
+    
+        // Animate product cards
+        const productCards = document.querySelectorAll('.product-card');
+        productCards.forEach((card, index) => {
+            gsap.to(card, {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                delay: 0.1 * index,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top bottom-=100'
                 }
             });
         });
-    });
-
-    // Animate coming soon text on hover
-    const comingSoonCards = document.querySelectorAll('.product-card:not([data-category="hats"])');
-    comingSoonCards.forEach(card => {
-        const text = card.querySelector('.coming-soon-text');
-        
-        card.addEventListener('mouseenter', () => {
-            gsap.to(text, {
-                opacity: 1,
-                y: 0,
-                duration: 0.4,
-                ease: 'power2.out'
+    
+        // Category filter functionality
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const products = document.querySelectorAll('.product-card');
+    
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const selectedCategory = btn.getAttribute('data-category');
+                
+                products.forEach(product => {
+                    if (selectedCategory === 'all' || product.getAttribute('data-category') === selectedCategory) {
+                        product.style.display = 'block';
+                        gsap.to(product, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.4,
+                            ease: 'power2.out'
+                        });
+                    } else {
+                        gsap.to(product, {
+                            opacity: 0,
+                            y: 20,
+                            duration: 0.4,
+                            ease: 'power2.in',
+                            onComplete: () => {
+                                product.style.display = 'none';
+                            }
+                        });
+                    }
+                });
             });
         });
-        
-        card.addEventListener('mouseleave', () => {
-            gsap.to(text, {
-                opacity: 0,
-                y: 20,
-                duration: 0.4,
-                ease: 'power2.in'
-            });
-        });
-    });
-
-    // Navbar scroll effect
-    window.addEventListener('scroll', () => {
-        const navbar = document.querySelector('.navbar');
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
-</script>
-</body>
-</html>
+    </script>
+    
+    </body>
+    </html>
