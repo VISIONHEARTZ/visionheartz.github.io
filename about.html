@@ -52,12 +52,6 @@
             backdrop-filter: blur(10px);
         }
 
-        .announcement-banner span {
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -94,7 +88,7 @@
 
         .nav-links a {
             text-decoration: none;
-            color: var(--text-white); /* Fixed color */
+            color: var(--text-white);
             font-weight: 500;
             font-size: 1rem;
             text-transform: uppercase;
@@ -118,31 +112,20 @@
             width: 100%;
         }
 
-        
+        .logo {
+            font-family: 'Italiana', serif;
+            font-size: 1.75rem;
+            color: var(--text-white);
+            text-decoration: none;
+            letter-spacing: 3px;
+            transition: color 0.3s ease;
+        }
+
         .about-section {
             padding: 180px 5% 100px;
             max-width: 1400px;
             margin: 0 auto;
             background: var(--primary-black);
-        }
-
-        .section-title {
-            font-family: 'Italiana', serif;
-            font-size: 4rem;
-            margin-bottom: 2rem;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-align: center;
-        }
-
-        .motto {
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 3rem;
-            color: var(--text-white);
-            text-align: center;
-            letter-spacing: -0.02em;
         }
 
         .dictionary-entry {
@@ -156,11 +139,6 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .dictionary-entry:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
         .entry-content {
             padding: 3rem;
         }
@@ -172,51 +150,11 @@
             position: relative;
         }
 
-        .entry-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(255, 51, 51, 0.2), transparent);
-        }
-
         .entry-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* New adjustable properties with custom data attributes */
-            object-position: center; /* Default value */
-            transform-origin: center;
             transition: transform 0.6s ease;
-        }
-
-        /* Individual image adjustments via data attributes */
-        .entry-image[data-position="top"] img {
-            object-position: center top;
-        }
-
-        .entry-image[data-position="bottom"] img {
-            object-position: center bottom;
-        }
-
-        .entry-image[data-position="left"] img {
-            object-position: left center;
-        }
-
-        .entry-image[data-position="right"] img {
-            object-position: right center;
-        }
-
-        /* Custom positioning with percentages */
-        .entry-image[data-position-x] img,
-        .entry-image[data-position-y] img {
-            object-position: var(--pos-x, 50%) var(--pos-y, 50%);
-        }
-
-        .dictionary-entry:hover .entry-image img {
-            transform: scale(1.1);
         }
 
         .word {
@@ -227,151 +165,11 @@
             letter-spacing: -0.02em;
         }
 
-        .pronunciation {
-            color: var(--text-gray);
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            font-style: italic;
-        }
-
-        .part-of-speech {
-            color: var(--text-gray);
-            margin-bottom: 1rem;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
         .definition {
             color: var(--text-white);
             font-size: 1.2rem;
             line-height: 1.8;
             margin-bottom: 1rem;
-        }
-
-        .example {
-            color: var(--text-gray);
-            font-style: italic;
-            margin-left: 1rem;
-            font-size: 1rem;
-            line-height: 1.6;
-            border-left: 2px solid var(--primary-red);
-            padding-left: 1rem;
-            background: rgba(255, 51, 51, 0.05);
-            border-radius: 0 8px 8px 0;
-        }
-
-        /* Image Controls */
-        .image-controls {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 5px;
-            padding: 5px;
-            display: flex;
-            gap: 5px;
-            z-index: 5;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .entry-image:hover .image-controls {
-            opacity: 1;
-        }
-
-        .image-control-btn {
-            background: var(--primary-red);
-            color: white;
-            border: none;
-            border-radius: 3px;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.2s ease;
-        }
-
-        .image-control-btn:hover {
-            background: #cc2929;
-        }
-
-        /* Newsletter Banner */
-        .newsletter-banner {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            z-index: 1000;
-        }
-
-        .newsletter-banner-text {
-            color: var(--text-white);
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .newsletter-banner-button {
-            background: var(--gradient-1);
-            color: var(--text-white);
-            padding: 0.75rem 2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .newsletter-banner-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 51, 51, 0.2);
-        }
-
-        @media (max-width: 968px) {
-            .dictionary-entry {
-                grid-template-columns: 1fr;
-            }
-            .entry-image {
-                height: 300px;
-            }
-            .section-title {
-                font-size: 3rem;
-            }
-            .motto {
-                font-size: 2rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            .section-title {
-                font-size: 2.5rem;
-            }
-            .motto {
-                font-size: 1.75rem;
-            }
-            .word {
-                font-size: 2rem;
-            }
-            .newsletter-banner {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1.5rem;
-                text-align: center;
-            }
         }
     </style>
 </head>
@@ -380,6 +178,12 @@
         <span>Coming Soon</span> | Join the Waitlist for Exclusive Early Access
     </div>
 
+       <!-- Announcement Banner -->
+       <div class="announcement-banner">
+        <span>End of season markdowns.</span> Get up to 10% off select styles.
+    </div>
+
+    <!-- Navigation -->
     <nav class="navbar">
         <a href="index.html" class="logo">VISIONHEARTZ</a>
         <div class="nav-links">
@@ -387,198 +191,136 @@
             <a href="about.html">Vision</a>
             <a href="contact.html">Contact</a>
             <a href="faq.html">Faq</a>
+        
         </div>
     </nav>
 
+            
+
     <section class="about-section">
-        <h1 class="section-title">Our Vision</h1>
-        <div class="motto">Heart Big. Vision Bigger.</div>
-        <div class="part-of-speech">"Empowering your unique fashion journey, transforming clothing into a reflection of your personal story."</div>
-        
         <div class="dictionary-entry">
             <div class="entry-content">
                 <div class="word">pas·sion</div>
-                <div class="pronunciation">/ˈpaSH(ə)n/</div>
-                <div class="part-of-speech">noun</div>
                 <div class="definition">1. strong and barely controllable emotion.</div>
-                <div class="example">"a man of impetuous passion"</div>
             </div>
-            <div class="entry-image" data-position="center" style="--pos-x: 50%; --pos-y: 50%;">
-                <img src="IMG_1721.jpeg" alt="Passion illustration">
-                <div class="image-controls">
-                    <button class="image-control-btn move-up">↑</button>
-                    <button class="image-control-btn move-down">↓</button>
-                    <button class="image-control-btn move-left">←</button>
-                    <button class="image-control-btn move-right">→</button>
-                </div>
+            <div class="entry-image">
+                <img src="IMG_1721.jpeg" alt="Passion illustration" id="passion-image">
             </div>
         </div>
 
         <div class="dictionary-entry">
             <div class="entry-content">
                 <div class="word">ded·i·ca·tion</div>
-                <div class="pronunciation">/ˌdedəˈkāSH(ə)n/</div>
-                <div class="part-of-speech">noun</div>
                 <div class="definition">1. the quality of being dedicated or committed to a task or purpose.</div>
-                <div class="example">"his dedication to the cause of peace"</div>
             </div>
-            <div class="entry-image" data-position="center" style="--pos-x: 50%; --pos-y: 50%;">
-                <img src="IMG_1723.jpeg" alt="Dedication illustration">
-                <div class="image-controls">
-                    <button class="image-control-btn move-up">↑</button>
-                    <button class="image-control-btn move-down">↓</button>
-                    <button class="image-control-btn move-left">←</button>
-                    <button class="image-control-btn move-right">→</button>
-                </div>
+            <div class="entry-image">
+                <img src="IMG_1723.jpeg" alt="Dedication illustration" id="dedication-image">
             </div>
         </div>
 
         <div class="dictionary-entry">
             <div class="entry-content">
                 <div class="word">de·ter·mi·na·tion</div>
-                <div class="pronunciation">/dəˌtərməˈnāSH(ə)n/</div>
-                <div class="part-of-speech">noun</div>
                 <div class="definition">1. firmness of purpose; resoluteness.</div>
-                <div class="example">"pursuing one's goals with determination"</div>
             </div>
-            <div class="entry-image" data-position="center" style="--pos-x: 50%; --pos-y: 50%;">
-                <img src="IMG_1724.jpeg" alt="Determination illustration">
-                <div class="image-controls">
-                    <button class="image-control-btn move-up">↑</button>
-                    <button class="image-control-btn move-down">↓</button>
-                    <button class="image-control-btn move-left">←</button>
-                    <button class="image-control-btn move-right">→</button>
-                </div>
+            <div class="entry-image">
+                <img src="IMG_1724.jpeg" alt="Determination illustration" id="determination-image">
             </div>
         </div>
     </section>
 
     <script>
-        gsap.registerPlugin(ScrollTrigger);
+        // Image Position Configuration Object
+        const IMAGE_POSITIONS = {
+            passion: {
+                verticalOffset: 0,   // Pixels to move vertically (negative moves up, positive moves down)
+                horizontalOffset: 0, // Pixels to move horizontally (negative moves left, positive moves right)
+                scale: 1.0,          // Image scale (1.0 is original size)
+                rotation: 0          // Rotation in degrees
+            },
+            dedication: {
+                verticalOffset: 0,
+                horizontalOffset: 0,
+                scale: 1.0,
+                rotation: 0
+            },
+            determination: {
+                verticalOffset: 0,
+                horizontalOffset: 0,
+                scale: 1.0,
+                rotation: 0
+            }
+        };
 
-        // Image position adjustment
-        document.querySelectorAll('.image-controls').forEach(control => {
-            const imageContainer = control.closest('.entry-image');
-            const moveStep = 5; // Percentage to move in each step
-            
-            // Get the current position values
-            let posX = parseInt(imageContainer.style.getPropertyValue('--pos-x')) || 50;
-            let posY = parseInt(imageContainer.style.getPropertyValue('--pos-y')) || 50;
-            
-            // Up button
-            control.querySelector('.move-up').addEventListener('click', () => {
-                posY = Math.max(0, posY - moveStep);
-                imageContainer.style.setProperty('--pos-y', `${posY}%`);
-            });
-            
-            // Down button
-            control.querySelector('.move-down').addEventListener('click', () => {
-                posY = Math.min(100, posY + moveStep);
-                imageContainer.style.setProperty('--pos-y', `${posY}%`);
-            });
-            
-            // Left button
-            control.querySelector('.move-left').addEventListener('click', () => {
-                posX = Math.max(0, posX - moveStep);
-                imageContainer.style.setProperty('--pos-x', `${posX}%`);
-            });
-            
-            // Right button
-            control.querySelector('.move-right').addEventListener('click', () => {
-                posX = Math.min(100, posX + moveStep);
-                imageContainer.style.setProperty('--pos-x', `${posX}%`);
-            });
-        });
-
-        // Initial page load animations
-        window.addEventListener('load', () => {
-            // Fade in the navbar and announcement
-            gsap.from('.announcement-banner', {
-                y: -50,
-                opacity: 0,
-                duration: 1,
-                ease: 'power3.out'
+        // Function to adjust image positions
+        function adjustImagePositions(imagePositions) {
+            // Passion Image Adjustments
+            const passionImage = document.getElementById('passion-image');
+            gsap.to(passionImage, {
+                y: imagePositions.passion.verticalOffset,
+                x: imagePositions.passion.horizontalOffset,
+                scale: imagePositions.passion.scale,
+                rotation: imagePositions.passion.rotation,
+                duration: 0.5,
+                ease: 'power1.inOut'
             });
 
-            gsap.from('.navbar', {
-                y: -50,
-                opacity: 0,
-                duration: 1,
-                delay: 0.3,
-                ease: 'power3.out'
+            // Dedication Image Adjustments
+            const dedicationImage = document.getElementById('dedication-image');
+            gsap.to(dedicationImage, {
+                y: imagePositions.dedication.verticalOffset,
+                x: imagePositions.dedication.horizontalOffset,
+                scale: imagePositions.dedication.scale,
+                rotation: imagePositions.dedication.rotation,
+                duration: 0.5,
+                ease: 'power1.inOut'
             });
 
-            // Animate the title and motto
-            gsap.from('.section-title', {
-                y: 50,
-                opacity: 0,
-                duration: 1,
-                delay: 0.5,
-                ease: 'power3.out'
+            // Determination Image Adjustments
+            const determinationImage = document.getElementById('determination-image');
+            gsap.to(determinationImage, {
+                y: imagePositions.determination.verticalOffset,
+                x: imagePositions.determination.horizontalOffset,
+                scale: imagePositions.determination.scale,
+                rotation: imagePositions.determination.rotation,
+                duration: 0.5,
+                ease: 'power1.inOut'
             });
+        }
 
-            gsap.from('.motto', {
-                y: 30,
-                opacity: 0,
-                duration: 1,
-                delay: 0.7,
-                ease: 'power3.out'
-            });
-
-            // Dictionary entries stagger animation
-            gsap.from('.dictionary-entry', {
-                opacity: 0,
-                y: 50,
-                duration: 1,
-                stagger: 0.3,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: '.about-section',
-                    start: 'top center+=100',
-                    toggleActions: 'play none none reverse'
+        // Example of how to use the function
+        function exampleImageAdjustments() {
+            // Modify these values to adjust images
+            const newImagePositions = {
+                passion: {
+                    verticalOffset: -50,  // Move passion image 50 pixels up
+                    horizontalOffset: 20, // Move 20 pixels to the right
+                    scale: 1.1,           // Slightly enlarge
+                    rotation: 5           // Slight rotation
+                },
+                dedication: {
+                    verticalOffset: 30,   // Move dedication image 30 pixels down
+                    horizontalOffset: -10, // Move 10 pixels to the left
+                    scale: 0.9,           // Slightly shrink
+                    rotation: -3          // Slight counter-rotation
+                },
+                determination: {
+                    verticalOffset: 0,    // No vertical movement
+                    horizontalOffset: 0,  // No horizontal movement
+                    scale: 1.0,           // Original size
+                    rotation: 0           // No rotation
                 }
-            });
+            };
 
-            // Animate dictionary entry content on scroll
-            document.querySelectorAll('.dictionary-entry').forEach(entry => {
-                gsap.from(entry.querySelector('.word'), {
-                    x: -50,
-                    opacity: 0,
-                    duration: 0.8,
-                    scrollTrigger: {
-                        trigger: entry,
-                        start: 'top center+=100',
-                        toggleActions: 'play none none reverse'
-                    }
-                });
+            // Apply the adjustments
+            adjustImagePositions(newImagePositions);
+        }
 
-                gsap.from(entry.querySelector('.definition'), {
-                    x: -30,
-                    opacity: 0,
-                    duration: 0.8,
-                    delay: 0.2,
-                    scrollTrigger: {
-                        trigger: entry,
-                        start: 'top center+=100',
-                        toggleActions: 'play none none reverse'
-                    }
-                });
-            });
-        });
+        // Optional: Call the example adjustments when the page loads
+        window.addEventListener('load', exampleImageAdjustments);
 
-        // Parallax effect for dictionary entry images
-        document.querySelectorAll('.entry-image').forEach(image => {
-            gsap.to(image.querySelector('img'), {
-                yPercent: 20,
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: image,
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: true
-                }
-            });
-        });
+        // Expose the function globally if you want to manually adjust from console
+        window.adjustImagePositions = adjustImagePositions;
     </script>
 </body>
 </html>
