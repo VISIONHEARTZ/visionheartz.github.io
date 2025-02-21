@@ -3,11 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VISIONHEARTZ - Heart Big Vision Bigger</title>
+    <title>Vision - VISIONHEARTZ</title>
+    
+    <!-- External CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@400;700&family=Italiana&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Italiana&display=swap" rel="stylesheet">
+    
+    <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
     <style>
         :root {
             --primary-red: #FF3333;
@@ -15,7 +20,6 @@
             --secondary-black: #121212;
             --text-white: #FFFFFF;
             --text-gray: #888888;
-            --accent-color: #FF3333;
             --gradient-1: linear-gradient(135deg, #FF3333 0%, #800020 100%);
             --card-bg: rgba(18, 18, 18, 0.95);
         }
@@ -42,16 +46,13 @@
             width: 100%;
             top: 0;
             z-index: 2000;
-            font-family: 'Space Grotesk', sans-serif;
             font-size: 0.875rem;
             font-weight: 500;
             letter-spacing: 0.05em;
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .announcement-banner span {
-            color: var(--text-white);
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -78,7 +79,6 @@
             color: var(--text-white);
             text-decoration: none;
             letter-spacing: 3px;
-            position: relative;
             transition: color 0.3s ease;
         }
 
@@ -87,65 +87,14 @@
         }
 
         .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    align-items: center;
-}
-
-.cart-icon {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: var(--text-white);
-    position: relative;
-}
-
-.cart-icon svg {
-    width: 1.5rem;
-    height: 1.5rem;
-    transition: all 0.3s ease;
-}
-
-/* Remove the after pseudo-element for cart icon */
-.cart-icon::after {
-    display: none;
-}
-
-.cart-icon:hover {
-    color: var(--primary-red);
-}
-
-.cart-count {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background: var(--primary-red);
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 0.15rem 0.4rem;
-    border-radius: 1rem;
-    min-width: 1.2rem;
-    text-align: center;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none;
-    }
-    
-    /* Optionally, you might want to show the cart icon on mobile */
-    .cart-icon {
-        display: flex;
-    }
-
-    
-}
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--text-white);
+            color: var(--text-white); /* Fixed color */
             font-weight: 500;
             font-size: 1rem;
             text-transform: uppercase;
@@ -169,6 +118,7 @@
             width: 100%;
         }
 
+        
         .about-section {
             padding: 180px 5% 100px;
             max-width: 1400px;
@@ -190,7 +140,6 @@
             font-size: 2.5rem;
             font-weight: 600;
             margin-bottom: 3rem;
-            font-family: 'Space Grotesk', sans-serif;
             color: var(--text-white);
             text-align: center;
             letter-spacing: -0.02em;
@@ -237,7 +186,33 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            /* New adjustable properties with custom data attributes */
+            object-position: center; /* Default value */
+            transform-origin: center;
             transition: transform 0.6s ease;
+        }
+
+        /* Individual image adjustments via data attributes */
+        .entry-image[data-position="top"] img {
+            object-position: center top;
+        }
+
+        .entry-image[data-position="bottom"] img {
+            object-position: center bottom;
+        }
+
+        .entry-image[data-position="left"] img {
+            object-position: left center;
+        }
+
+        .entry-image[data-position="right"] img {
+            object-position: right center;
+        }
+
+        /* Custom positioning with percentages */
+        .entry-image[data-position-x] img,
+        .entry-image[data-position-y] img {
+            object-position: var(--pos-x, 50%) var(--pos-y, 50%);
         }
 
         .dictionary-entry:hover .entry-image img {
@@ -248,13 +223,11 @@
             font-size: 2.5rem;
             font-weight: 600;
             color: var(--primary-red);
-            font-family: 'Space Grotesk', sans-serif;
             margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
         }
 
         .pronunciation {
-            font-family: 'Space Grotesk', sans-serif;
             color: var(--text-gray);
             font-size: 1.1rem;
             margin-bottom: 1rem;
@@ -288,74 +261,79 @@
             border-radius: 0 8px 8px 0;
         }
 
-        .stay-connected {
-            text-align: center;
-            padding: 6rem 5%;
-            background: linear-gradient(to right, var(--secondary-black), rgba(255,51,51,0.1));
-            position: relative;
-            overflow: hidden;
+        /* Image Controls */
+        .image-controls {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            padding: 5px;
+            display: flex;
+            gap: 5px;
+            z-index: 5;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .stay-connected::before {
-            content: '';
-            position: absolute;
-            top: 0;
+        .entry-image:hover .image-controls {
+            opacity: 1;
+        }
+
+        .image-control-btn {
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            border-radius: 3px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .image-control-btn:hover {
+            background: #cc2929;
+        }
+
+        /* Newsletter Banner */
+        .newsletter-banner {
+            position: fixed;
+            bottom: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="%23FF3333" fill-opacity="0.05"/></svg>');
-            opacity: 0.5;
-        }
-
-        .stay-connected h3 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            font-family: 'Italiana', serif;
-            position: relative;
-        }
-
-        .newsletter-form {
-            max-width: 500px;
-            margin: 0 auto;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1rem 5%;
             display: flex;
-            gap: 1rem;
-            position: relative;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            z-index: 1000;
         }
 
-        .newsletter-input {
-            flex: 1;
-            padding: 1.25rem;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: rgba(18, 18, 18, 0.95);
-            color: white;
-            border-radius: 8px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1rem;
+        .newsletter-banner-text {
+            color: var(--text-white);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .newsletter-banner-button {
+            background: var(--gradient-1);
+            color: var(--text-white);
+            padding: 0.75rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
             transition: all 0.3s ease;
         }
 
-        .newsletter-input:focus {
-            outline: none;
-            border-color: var(--primary-red);
-            box-shadow: 0 0 0 3px rgba(255, 51, 51, 0.1);
-        }
-
-        .subscribe-btn {
-            padding: 1.25rem 2.5rem;
-            background: var(--gradient-1);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .subscribe-btn:hover {
+        .newsletter-banner-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(255, 51, 51, 0.2);
         }
@@ -364,15 +342,12 @@
             .dictionary-entry {
                 grid-template-columns: 1fr;
             }
-
             .entry-image {
                 height: 300px;
             }
-
             .section-title {
                 font-size: 3rem;
             }
-
             .motto {
                 font-size: 2rem;
             }
@@ -382,75 +357,22 @@
             .nav-links {
                 display: none;
             }
-
             .section-title {
                 font-size: 2.5rem;
             }
-
             .motto {
                 font-size: 1.75rem;
             }
-
             .word {
                 font-size: 2rem;
             }
-
-            .newsletter-form {
+            .newsletter-banner {
                 flex-direction: column;
-            }
-
-            .entry-content {
-                padding: 2rem;
+                gap: 1rem;
+                padding: 1.5rem;
+                text-align: center;
             }
         }
-
-    /* Newsletter Banner */
-.newsletter-banner {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(10, 10, 10, 0.95);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding: 1rem 5%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    z-index: 1000;
-}
-
-.newsletter-banner-text {
-    color: var(--text-white);
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-.newsletter-banner-button {
-    background: var(--primary-red);
-    color: var(--text-white);
-    padding: 0.75rem 2rem;
-    border-radius: 4px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.newsletter-banner-button:hover {
-    background: #cc2929;
-    transform: translateY(-1px);
-}
-
-@media (max-width: 768px) {
-    .newsletter-banner {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem;
-        text-align: center;
-    }
-}
     </style>
 </head>
 <body>
@@ -458,21 +380,15 @@
         <span>Coming Soon</span> | Join the Waitlist for Exclusive Early Access
     </div>
 
-  <!-- Navigation -->
-<nav class="navbar">
-    <a href="index.html" class="logo">VISIONHEARTZ</a>
-    <div class="nav-links">
-        <a href="collections.html">Collection</a>
-        <a href="about.html">Vision</a>
-        <a href="contact.html">Contact</a>
-        <a href="/cart" class="cart-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-            </svg>
-            <span class="cart-count">0</span>
-        </a>
-    </div>
-</nav>
+    <nav class="navbar">
+        <a href="index.html" class="logo">VISIONHEARTZ</a>
+        <div class="nav-links">
+            <a href="collections.html">Collection</a>
+            <a href="about.html">Vision</a>
+            <a href="contact.html">Contact</a>
+            <a href="faq.html">Faq</a>
+        </div>
+    </nav>
 
     <section class="about-section">
         <h1 class="section-title">Our Vision</h1>
@@ -487,8 +403,14 @@
                 <div class="definition">1. strong and barely controllable emotion.</div>
                 <div class="example">"a man of impetuous passion"</div>
             </div>
-            <div class="entry-image">
+            <div class="entry-image" data-position="center" style="--pos-x: 50%; --pos-y: 50%;">
                 <img src="IMG_1721.jpeg" alt="Passion illustration">
+                <div class="image-controls">
+                    <button class="image-control-btn move-up">↑</button>
+                    <button class="image-control-btn move-down">↓</button>
+                    <button class="image-control-btn move-left">←</button>
+                    <button class="image-control-btn move-right">→</button>
+                </div>
             </div>
         </div>
 
@@ -500,8 +422,14 @@
                 <div class="definition">1. the quality of being dedicated or committed to a task or purpose.</div>
                 <div class="example">"his dedication to the cause of peace"</div>
             </div>
-            <div class="entry-image">
+            <div class="entry-image" data-position="center" style="--pos-x: 50%; --pos-y: 50%;">
                 <img src="IMG_1723.jpeg" alt="Dedication illustration">
+                <div class="image-controls">
+                    <button class="image-control-btn move-up">↑</button>
+                    <button class="image-control-btn move-down">↓</button>
+                    <button class="image-control-btn move-left">←</button>
+                    <button class="image-control-btn move-right">→</button>
+                </div>
             </div>
         </div>
 
@@ -513,15 +441,54 @@
                 <div class="definition">1. firmness of purpose; resoluteness.</div>
                 <div class="example">"pursuing one's goals with determination"</div>
             </div>
-            <div class="entry-image">
+            <div class="entry-image" data-position="center" style="--pos-x: 50%; --pos-y: 50%;">
                 <img src="IMG_1724.jpeg" alt="Determination illustration">
+                <div class="image-controls">
+                    <button class="image-control-btn move-up">↑</button>
+                    <button class="image-control-btn move-down">↓</button>
+                    <button class="image-control-btn move-left">←</button>
+                    <button class="image-control-btn move-right">→</button>
+                </div>
             </div>
         </div>
     </section>
 
-
     <script>
         gsap.registerPlugin(ScrollTrigger);
+
+        // Image position adjustment
+        document.querySelectorAll('.image-controls').forEach(control => {
+            const imageContainer = control.closest('.entry-image');
+            const moveStep = 5; // Percentage to move in each step
+            
+            // Get the current position values
+            let posX = parseInt(imageContainer.style.getPropertyValue('--pos-x')) || 50;
+            let posY = parseInt(imageContainer.style.getPropertyValue('--pos-y')) || 50;
+            
+            // Up button
+            control.querySelector('.move-up').addEventListener('click', () => {
+                posY = Math.max(0, posY - moveStep);
+                imageContainer.style.setProperty('--pos-y', `${posY}%`);
+            });
+            
+            // Down button
+            control.querySelector('.move-down').addEventListener('click', () => {
+                posY = Math.min(100, posY + moveStep);
+                imageContainer.style.setProperty('--pos-y', `${posY}%`);
+            });
+            
+            // Left button
+            control.querySelector('.move-left').addEventListener('click', () => {
+                posX = Math.max(0, posX - moveStep);
+                imageContainer.style.setProperty('--pos-x', `${posX}%`);
+            });
+            
+            // Right button
+            control.querySelector('.move-right').addEventListener('click', () => {
+                posX = Math.min(100, posX + moveStep);
+                imageContainer.style.setProperty('--pos-x', `${posX}%`);
+            });
+        });
 
         // Initial page load animations
         window.addEventListener('load', () => {
@@ -597,50 +564,6 @@
                     }
                 });
             });
-
-            // Stay connected section animation
-            gsap.from('.stay-connected', {
-                opacity: 0,
-                y: 30,
-                duration: 1,
-                scrollTrigger: {
-                    trigger: '.stay-connected',
-                    start: 'top center+=200',
-                    toggleActions: 'play none none reverse'
-                }
-            });
-
-            gsap.from('.newsletter-form', {
-                opacity: 0,
-                y: 20,
-                duration: 1,
-                delay: 0.3,
-                scrollTrigger: {
-                    trigger: '.stay-connected',
-                    start: 'top center+=200',
-                    toggleActions: 'play none none reverse'
-                }
-            });
-        });
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('.nav-links a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    gsap.to(window, {
-                        duration: 1,
-                        scrollTo: {
-                            y: targetElement,
-                            offsetY: 100
-                        },
-                        ease: 'power3.inOut'
-                    });
-                }
-            });
         });
 
         // Parallax effect for dictionary entry images
@@ -657,10 +580,5 @@
             });
         });
     </script>
-
-<div class="newsletter-banner">
-    <span class="newsletter-banner-text">Be the first to know about new arrivals</span>
-    <a href="#" class="newsletter-banner-button">Sign up</a>
-</div>
 </body>
 </html>
