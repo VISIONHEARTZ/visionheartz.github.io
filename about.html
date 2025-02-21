@@ -35,6 +35,7 @@
             color: var(--text-white);
             font-family: 'Space Grotesk', sans-serif;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .announcement-banner {
@@ -56,20 +57,20 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 5%;
+            padding: 1rem 5%;
             background: rgba(10, 10, 10, 0.95);
             position: fixed;
             width: 100%;
             z-index: 1000;
-            height: 80px;
             top: 38px;
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
         }
 
         .logo {
             font-family: 'Italiana', serif;
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             color: var(--text-white);
             text-decoration: none;
             letter-spacing: 3px;
@@ -82,7 +83,7 @@
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 1.5rem;
             align-items: center;
         }
 
@@ -90,7 +91,7 @@
             text-decoration: none;
             color: var(--text-white);
             font-weight: 500;
-            font-size: 1rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             position: relative;
@@ -112,40 +113,49 @@
             width: 100%;
         }
 
-        .logo {
-            font-family: 'Italiana', serif;
-            font-size: 1.75rem;
-            color: var(--text-white);
-            text-decoration: none;
-            letter-spacing: 3px;
-            transition: color 0.3s ease;
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1010;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: var(--text-white);
+            transition: all 0.3s ease;
         }
 
         .about-section {
-            padding: 180px 5% 100px;
+            padding: 140px 5% 60px;
             max-width: 1400px;
             margin: 0 auto;
             background: var(--primary-black);
         }
 
         .dictionary-entry {
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             background: var(--card-bg);
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.05);
             display: grid;
-            grid-template-columns: 1fr 400px;
+            grid-template-columns: 1fr;
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .entry-content {
-            padding: 3rem;
+            padding: 2rem;
         }
 
         .entry-image {
             width: 100%;
-            height: 100%;
+            height: 250px;
             overflow: hidden;
             position: relative;
         }
@@ -158,7 +168,7 @@
         }
 
         .word {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 600;
             color: var(--primary-red);
             margin-bottom: 0.5rem;
@@ -167,19 +177,127 @@
 
         .definition {
             color: var(--text-white);
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Mobile Menu Styles */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-black);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1005;
+            transform: translateY(-100%);
+            transition: transform 0.4s ease;
+            padding-top: 80px;
+        }
+
+        .mobile-nav.active {
+            transform: translateY(0);
+        }
+
+        .mobile-nav a {
+            font-size: 1.5rem;
+            color: var(--text-white);
+            text-decoration: none;
+            margin: 1rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--primary-red);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        /* Media Queries */
+        @media (min-width: 768px) {
+            .dictionary-entry {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .entry-image {
+                height: 100%;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .dictionary-entry {
+                grid-template-columns: 1fr 400px;
+            }
+            
+            .entry-content {
+                padding: 3rem;
+            }
+            
+            .word {
+                font-size: 2.5rem;
+            }
+            
+            .definition {
+                font-size: 1.2rem;
+            }
+            
+            .about-section {
+                padding: 180px 5% 100px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .navbar {
+                height: 70px;
+            }
+            
+            .announcement-banner {
+                font-size: 0.75rem;
+                padding: 0.5rem 3%;
+            }
+            
+            .about-section {
+                padding-top: 120px;
+            }
+            
+            .entry-content {
+                order: 2;
+            }
+            
+            .entry-image {
+                order: 1;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Announcement Banner -->
     <div class="announcement-banner">
-        <span>Coming Soon</span> | Join the Waitlist for Exclusive Early Access
-    </div>
-
-       <!-- Announcement Banner -->
-       <div class="announcement-banner">
         <span>End of season markdowns.</span> Get up to 10% off select styles.
     </div>
 
@@ -191,11 +309,21 @@
             <a href="about.html">Vision</a>
             <a href="contact.html">Contact</a>
             <a href="faq.html">Faq</a>
-        
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
     </nav>
 
-            
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <a href="collections.html">Collection</a>
+        <a href="about.html">Vision</a>
+        <a href="contact.html">Contact</a>
+        <a href="faq.html">Faq</a>
+    </div>
 
     <section class="about-section">
         <div class="dictionary-entry">
@@ -256,59 +384,67 @@
         function adjustImagePositions(imagePositions) {
             // Passion Image Adjustments
             const passionImage = document.getElementById('passion-image');
-            gsap.to(passionImage, {
-                y: imagePositions.passion.verticalOffset,
-                x: imagePositions.passion.horizontalOffset,
-                scale: imagePositions.passion.scale,
-                rotation: imagePositions.passion.rotation,
-                duration: 0.5,
-                ease: 'power1.inOut'
-            });
+            if (passionImage) {
+                gsap.to(passionImage, {
+                    y: imagePositions.passion.verticalOffset,
+                    x: imagePositions.passion.horizontalOffset,
+                    scale: imagePositions.passion.scale,
+                    rotation: imagePositions.passion.rotation,
+                    duration: 0.5,
+                    ease: 'power1.inOut'
+                });
+            }
 
             // Dedication Image Adjustments
             const dedicationImage = document.getElementById('dedication-image');
-            gsap.to(dedicationImage, {
-                y: imagePositions.dedication.verticalOffset,
-                x: imagePositions.dedication.horizontalOffset,
-                scale: imagePositions.dedication.scale,
-                rotation: imagePositions.dedication.rotation,
-                duration: 0.5,
-                ease: 'power1.inOut'
-            });
+            if (dedicationImage) {
+                gsap.to(dedicationImage, {
+                    y: imagePositions.dedication.verticalOffset,
+                    x: imagePositions.dedication.horizontalOffset,
+                    scale: imagePositions.dedication.scale,
+                    rotation: imagePositions.dedication.rotation,
+                    duration: 0.5,
+                    ease: 'power1.inOut'
+                });
+            }
 
             // Determination Image Adjustments
             const determinationImage = document.getElementById('determination-image');
-            gsap.to(determinationImage, {
-                y: imagePositions.determination.verticalOffset,
-                x: imagePositions.determination.horizontalOffset,
-                scale: imagePositions.determination.scale,
-                rotation: imagePositions.determination.rotation,
-                duration: 0.5,
-                ease: 'power1.inOut'
-            });
+            if (determinationImage) {
+                gsap.to(determinationImage, {
+                    y: imagePositions.determination.verticalOffset,
+                    x: imagePositions.determination.horizontalOffset,
+                    scale: imagePositions.determination.scale,
+                    rotation: imagePositions.determination.rotation,
+                    duration: 0.5,
+                    ease: 'power1.inOut'
+                });
+            }
         }
 
         // Example of how to use the function
         function exampleImageAdjustments() {
-            // Modify these values to adjust images
+            // Modify these values to adjust images based on screen size
+            const isMobile = window.innerWidth < 768;
+            
             const newImagePositions = {
                 passion: {
-                    verticalOffset: -50,  // Move passion image 50 pixels up
-                    horizontalOffset: 20, // Move 20 pixels to the right
-                    scale: 1.1,           // Slightly enlarge
-                    rotation: 5           // Slight rotation
+                    verticalOffset: isMobile ? 0 : -30,
+                    horizontalOffset: isMobile ? 0 : 10,
+                    scale: isMobile ? 1.05 : 1.1,
+                    rotation: 0
                 },
                 dedication: {
-                    verticalOffset: 30,   // Move dedication image 30 pixels down
-                    horizontalOffset: -10, // Move 10 pixels to the left
-                    scale: 0.9,           // Slightly shrink
-                    rotation: -3          // Slight counter-rotation
+                    verticalOffset: isMobile ? 0 : 20,
+                    horizontalOffset: isMobile ? 0 : -10,
+                    scale: isMobile ? 1.05 : 0.95,
+                    rotation: 0
                 },
                 determination: {
-                    verticalOffset: 0,    // No vertical movement
-                    horizontalOffset: 0,  // No horizontal movement
-                    scale: 1.0,           // Original size
-                    rotation: 0           // No rotation
+                    verticalOffset: 0,
+                    horizontalOffset: 0,
+                    scale: isMobile ? 1.05 : 1.0,
+                    rotation: 0
                 }
             };
 
@@ -316,8 +452,35 @@
             adjustImagePositions(newImagePositions);
         }
 
-        // Optional: Call the example adjustments when the page loads
+        // Toggle mobile menu
+        const hamburger = document.querySelector('.hamburger');
+        const mobileNav = document.querySelector('.mobile-nav');
+        
+        if (hamburger) {
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                if (mobileNav) {
+                    mobileNav.classList.toggle('active');
+                }
+                document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : 'auto';
+            });
+        }
+
+        // Close mobile menu when clicking a link
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (hamburger && mobileNav) {
+                    hamburger.classList.remove('active');
+                    mobileNav.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // Call image adjustments when the page loads and on resize
         window.addEventListener('load', exampleImageAdjustments);
+        window.addEventListener('resize', exampleImageAdjustments);
 
         // Expose the function globally if you want to manually adjust from console
         window.adjustImagePositions = adjustImagePositions;
