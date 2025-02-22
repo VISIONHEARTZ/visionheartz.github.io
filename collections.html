@@ -74,6 +74,7 @@
             top: 38px;
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
         }
 
         .logo {
@@ -120,11 +121,104 @@
         .nav-links a:hover::after {
             width: 100%;
         }
+        
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1010;
+        }
 
-      
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: var(--text-white);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1005;
+            transform: translateY(-100%);
+            transition: transform 0.4s ease;
+            padding-top: 80px;
+        }
+
+        .mobile-nav.active {
+            transform: translateY(0);
+        }
+
+        .mobile-nav a {
+            font-size: 1.5rem;
+            color: var(--text-white);
+            text-decoration: none;
+            margin: 1rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--primary-red);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        /* Cart Icon */
+        .cart-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--primary-red);
+            color: var(--text-white);
+            font-size: 0.75rem;
+            font-weight: 600;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
         .collections-header {
-            padding: 180px 5% 80px;
+            padding: 180px 5% 60px;
             text-align: center;
             background: var(--secondary-black);
         }
@@ -183,6 +277,7 @@
             transition: transform 0.3s ease;
             opacity: 0;
             transform: translateY(30px);
+            position: relative;
         }
 
         .product-card:hover {
@@ -249,6 +344,17 @@
             padding: 2rem;
         }
 
+        .product-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .product-details p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
         .newsletter-banner {
             position: fixed;
             bottom: 0;
@@ -293,18 +399,41 @@
             .nav-links {
                 display: none;
             }
+            
+            .hamburger {
+                display: flex;
+            }
 
             .collections-title {
                 font-size: 2.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .collections-header {
+                padding: 130px 5% 40px;
             }
 
             .category-nav {
                 flex-wrap: wrap;
-                gap: 1rem;
+                gap: 0.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .category-btn {
+                padding: 0.75rem 1.25rem;
+                font-size: 0.8rem;
+                flex: 1 0 auto;
+                min-width: 100px;
             }
 
             .products-grid {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1.5rem;
+                padding: 2rem 5%;
+            }
+            
+            .product-details {
+                padding: 1.5rem;
             }
 
             .newsletter-banner {
@@ -312,6 +441,59 @@
                 gap: 1rem;
                 padding: 1.5rem;
                 text-align: center;
+            }
+            
+            .navbar {
+                height: 60px;
+                padding: 0.75rem 5%;
+                top: 32px;
+            }
+            
+            .logo {
+                font-size: 1.3rem;
+            }
+            
+            .announcement-banner {
+                font-size: 0.75rem;
+                padding: 0.5rem 3%;
+            }
+            
+            .best-seller-badge {
+                padding: 0.3rem 0.75rem;
+                font-size: 0.75rem;
+            }
+            
+            .newsletter-banner-button {
+                width: 100%;
+                padding: 0.75rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .collections-title {
+                font-size: 2rem;
+            }
+            
+            .product-image {
+                padding-top: 100%;
+            }
+            
+            .coming-soon-text {
+                font-size: 1rem;
+            }
+            
+            .category-nav {
+                margin-bottom: 1.5rem;
+            }
+            
+            .category-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.75rem;
             }
         }
     </style>
@@ -331,13 +513,27 @@
             <a href="contact.html">Contact</a>
             <a href="faq.html">Faq</a>
             <a href="cart.html" class="cart-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
                 <span class="cart-count">0</span>
             </a>
         </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <a href="collections.html">Collection</a>
+        <a href="about.html">Vision</a>
+        <a href="contact.html">Contact</a>
+        <a href="faq.html">Faq</a>
+        <a href="cart.html">Cart (0)</a>
+    </div>
 
     <!-- Collections Header -->
     <header class="collections-header">
@@ -360,8 +556,6 @@
         </div>
 
         <!-- Coming Soon Products -->
-      
-
         <div class="product-card" data-category="coming-soon">
             <div class="product-image">
                 <img src="IMG_2415_(1).jpg" alt="VISIONHEARTZ Sweatshirt" style="filter: blur(5px);">
@@ -389,107 +583,106 @@
         </div>
     </div>
 
-
     <!-- Shopify Buy Button Script -->
-<script type="text/javascript">
-    /*<![CDATA[*/
-    (function () {
-      var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
-      if (window.ShopifyBuy) {
-        if (window.ShopifyBuy.UI) {
-          ShopifyBuyInit();
-        } else {
-          loadScript();
-        }
-      } else {
-        loadScript();
-      }
-    
-      function loadScript() {
-        var script = document.createElement('script');
-        script.async = true;
-        script.src = scriptURL;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
-        script.onload = ShopifyBuyInit;
-      }
-    
-      function ShopifyBuyInit() {
-        var client = ShopifyBuy.buildClient({
-          domain: '3ce50c-53.myshopify.com',
-          storefrontAccessToken: '887c74fb1b3d138a5a1f6e6571015f3d',
-        });
-    
-        ShopifyBuy.UI.onReady(client).then(function (ui) {
-          ui.createComponent('product', {
-            id: '7907473293511',
-            node: document.getElementById('product-component-1738110326378'),
-            moneyFormat: '%24%7B%7Bamount%7D%7D',
-            options: {
-              "product": {
-                "styles": {
+    <script type="text/javascript">
+        /*<![CDATA[*/
+        (function () {
+          var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+          if (window.ShopifyBuy) {
+            if (window.ShopifyBuy.UI) {
+              ShopifyBuyInit();
+            } else {
+              loadScript();
+            }
+          } else {
+            loadScript();
+          }
+        
+          function loadScript() {
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = scriptURL;
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+            script.onload = ShopifyBuyInit;
+          }
+        
+          function ShopifyBuyInit() {
+            var client = ShopifyBuy.buildClient({
+              domain: '3ce50c-53.myshopify.com',
+              storefrontAccessToken: '887c74fb1b3d138a5a1f6e6571015f3d',
+            });
+        
+            ShopifyBuy.UI.onReady(client).then(function (ui) {
+              ui.createComponent('product', {
+                id: '7907473293511',
+                node: document.getElementById('product-component-1738110326378'),
+                moneyFormat: '%24%7B%7Bamount%7D%7D',
+                options: {
                   "product": {
-                    "@media (min-width: 601px)": {
-                      "max-width": "100%",
-                      "margin-left": "0",
-                      "margin-bottom": "0"
+                    "styles": {
+                      "product": {
+                        "@media (min-width: 601px)": {
+                          "max-width": "100%",
+                          "margin-left": "0",
+                          "margin-bottom": "0"
+                        }
+                      },
+                      "title": {
+                        "font-family": "Quantico Bold, Helvetica Neue, sans-serif",
+                        "font-size": "1.2rem",
+                        "color": "#FFFFFF",
+                        "font-weight": "500",
+                        "text-transform": "uppercase",
+                        "letter-spacing": "0.1em"
+                      },
+                      "price": {
+                        "font-family": "Helvetica Neue, sans-serif",
+                        "color": "#FF3333",
+                        "font-size": "1.1rem",
+                        "margin-top": "0.5rem"
+                      },
+                      "button": {
+                        ":hover": {
+                          "background": "linear-gradient(135deg, #FF3333 0%, #800020 100%)",
+                          "transform": "translateY(-2px)",
+                          "box-shadow": "0 8px 20px rgba(255, 51, 51, 0.2)"
+                        },
+                        "background": "linear-gradient(135deg, #FF3333 0%, #800020 100%)",
+                        ":focus": {
+                          "background": "linear-gradient(135deg, #FF3333 0%, #800020 100%)"
+                        },
+                        "border-radius": "4px",
+                        "padding": "1rem 2.5rem",
+                        "font-family": "Helvetica Neue, sans-serif",
+                        "font-weight": "500",
+                        "text-transform": "uppercase",
+                        "letter-spacing": "0.1em",
+                        "transition": "all 0.3s ease",
+                        "margin-top": "1rem"
+                      }
                     }
                   },
-                  "title": {
-                    "font-family": "Quantico Bold, Helvetica Neue, sans-serif",
-                    "font-size": "1.2rem",
-                    "color": "#FFFFFF",
-                    "font-weight": "500",
-                    "text-transform": "uppercase",
-                    "letter-spacing": "0.1em"
-                  },
-                  "price": {
-                    "font-family": "Helvetica Neue, sans-serif",
-                    "color": "#FF3333",
-                    "font-size": "1.1rem",
-                    "margin-top": "0.5rem"
-                  },
-                  "button": {
-                    ":hover": {
-                      "background": "linear-gradient(135deg, #FF3333 0%, #800020 100%)",
-                      "transform": "translateY(-2px)",
-                      "box-shadow": "0 8px 20px rgba(255, 51, 51, 0.2)"
+                  "cart": {
+                    "styles": {
+                      "button": {
+                        ":hover": {
+                          "background": "linear-gradient(135deg, #FF3333 0%, #800020 100%)",
+                          "transform": "translateY(-2px)"
+                        },
+                        "background": "linear-gradient(135deg, #FF3333 0%, #800020 100%)"
+                      }
                     },
-                    "background": "linear-gradient(135deg, #FF3333 0%, #800020 100%)",
-                    ":focus": {
-                      "background": "linear-gradient(135deg, #FF3333 0%, #800020 100%)"
-                    },
-                    "border-radius": "4px",
-                    "padding": "1rem 2.5rem",
-                    "font-family": "Helvetica Neue, sans-serif",
-                    "font-weight": "500",
-                    "text-transform": "uppercase",
-                    "letter-spacing": "0.1em",
-                    "transition": "all 0.3s ease",
-                    "margin-top": "1rem"
+                    "text": {
+                      "total": "Subtotal",
+                      "button": "Checkout"
+                    }
                   }
                 }
-              },
-              "cart": {
-                "styles": {
-                  "button": {
-                    ":hover": {
-                      "background": "linear-gradient(135deg, #FF3333 0%, #800020 100%)",
-                      "transform": "translateY(-2px)"
-                    },
-                    "background": "linear-gradient(135deg, #FF3333 0%, #800020 100%)"
-                  }
-                },
-                "text": {
-                  "total": "Subtotal",
-                  "button": "Checkout"
-                }
-              }
-            }
-          });
-        });
-      }
-    })();
-    /*]]>*/
+              });
+            });
+          }
+        })();
+        /*]]>*/
     </script>
     
     <!-- GSAP Animations -->
@@ -562,7 +755,32 @@
                 });
             });
         });
+        
+        // Toggle mobile menu
+        const hamburger = document.querySelector('.hamburger');
+        const mobileNav = document.querySelector('.mobile-nav');
+        
+        if (hamburger) {
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                if (mobileNav) {
+                    mobileNav.classList.toggle('active');
+                }
+                document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : 'auto';
+            });
+        }
+
+        // Close mobile menu when clicking a link
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (hamburger && mobileNav) {
+                    hamburger.classList.remove('active');
+                    mobileNav.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
     </script>
-    
-    </body>
-    </html>
+</body>
+</html>
