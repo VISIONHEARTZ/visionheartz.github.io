@@ -74,7 +74,7 @@
             font-size: 1.5rem;
             color: var(--text-white);
             text-decoration: none;
-            letter-spacing: 2px;
+            letter-spacing: A2px;
         }
 
         .nav-links {
@@ -245,6 +245,101 @@
         .social-link span {
             font-weight: 500;
         }
+        
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1010;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: var(--text-white);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1005;
+            transform: translateY(-100%);
+            transition: transform 0.4s ease;
+            padding-top: 80px;
+        }
+
+        .mobile-nav.active {
+            transform: translateY(0);
+        }
+
+        .mobile-nav a {
+            font-size: 1.5rem;
+            color: var(--text-white);
+            text-decoration: none;
+            margin: 1rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--primary-red);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        /* Cart Icon Styles */
+        .cart-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--primary-red);
+            color: var(--text-white);
+            font-size: 0.75rem;
+            font-weight: 600;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
         @media (max-width: 768px) {
             .contact-grid {
@@ -255,22 +350,91 @@
             .nav-links {
                 display: none;
             }
+            
+            .hamburger {
+                display: flex;
+            }
 
             .section-title {
                 font-size: 2rem;
+                margin-bottom: 1.5rem;
             }
 
             .contact-subtitle {
                 font-size: 1.3rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .contact-text {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
             }
 
             .social-links {
-                gap: 1rem;
+                gap: 0.75rem;
             }
 
             .social-link {
-                padding: 0.5rem 1rem;
+                padding: 0.6rem 1rem;
                 font-size: 0.9rem;
+                flex: 1 0 calc(50% - 0.75rem);
+                justify-content: center;
+            }
+            
+            .announcement-banner {
+                font-size: 0.75rem;
+                padding: 0.5rem 3%;
+            }
+            
+            .navbar {
+                height: 60px;
+                padding: 0.75rem 5%;
+            }
+            
+            .logo {
+                font-size: 1.25rem;
+            }
+            
+            .contact-section {
+                padding: 120px 5% 60px;
+            }
+            
+            .form-input, 
+            .form-textarea {
+                padding: 0.8rem;
+            }
+            
+            .submit-btn {
+                width: 100%;
+                padding: 0.8rem;
+            }
+            
+            .contact-content {
+                order: 1;
+            }
+            
+            .contact-form {
+                order: 2;
+                transform: translateY(20px);
+                margin-top: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .social-link {
+                flex: 1 0 100%;
+            }
+            
+            .form-group {
+                margin-bottom: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.75rem;
+            }
+            
+            .contact-subtitle {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -282,20 +446,33 @@
     </div>
 
     <!-- Navigation -->
-<nav class="navbar">
-    <a href="index.html" class="logo">VISIONHEARTZ</a>
-    <div class="nav-links">
+    <nav class="navbar">
+        <a href="index.html" class="logo">VISIONHEARTZ</a>
+        <div class="nav-links">
+            <a href="collections.html">Collection</a>
+            <a href="about.html">Vision</a>
+            <a href="contact.html">Contact</a>
+            <a href="/cart" class="cart-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+                <span class="cart-count">0</span>
+            </a>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
         <a href="collections.html">Collection</a>
         <a href="about.html">Vision</a>
         <a href="contact.html">Contact</a>
-        <a href="/cart" class="cart-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-            </svg>
-            <span class="cart-count">0</span>
-        </a>
+        <a href="/cart">Cart (0)</a>
     </div>
-</nav>
 
     <!-- Contact Section -->
     <section class="contact-section">
@@ -329,7 +506,7 @@
                         <a href="https://www.instagram.com/vh_hbvb?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="social-link">
                             <i class="fab fa-instagram"></i>
                             <span>Instagram</span>
-            
+                        </a>
                         <a href="https://www.facebook.com/people/VisionHeartz/61557517620308/" target="_blank" class="social-link">
                             <i class="fab fa-facebook"></i>
                             <span>Facebook</span>
@@ -369,6 +546,7 @@
     </section>
 
     <script>
+        // Animation for content
         window.addEventListener('load', () => {
             gsap.to('.contact-content', {
                 opacity: 1,
@@ -380,13 +558,38 @@
             gsap.to('.contact-form', {
                 opacity: 1,
                 x: 0,
+                y: 0,
                 duration: 1,
                 delay: 0.3,
                 ease: 'power2.out'
             });
         });
-    </script>
+        
+        // Toggle mobile menu
+        const hamburger = document.querySelector('.hamburger');
+        const mobileNav = document.querySelector('.mobile-nav');
+        
+        if (hamburger) {
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                if (mobileNav) {
+                    mobileNav.classList.toggle('active');
+                }
+                document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : 'auto';
+            });
+        }
 
-    
+        // Close mobile menu when clicking a link
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (hamburger && mobileNav) {
+                    hamburger.classList.remove('active');
+                    mobileNav.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
