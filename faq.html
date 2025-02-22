@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - VISIONHEARTZ</title>
+    
+    <!-- External CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Italiana&display=swap" rel="stylesheet">
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            --primary-red: #FF3333;
+            --primary-black: #0A0A0A;
+            --secondary-black: #121212;
+            --text-white: #FFFFFF;
+            --text-gray: #888888;
+            --gradient-1: linear-gradient(135deg, #FF3333 0%, #800020 100%);
+            --card-bg: rgba(18, 18, 18, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--primary-black);
+            color: var(--text-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .announcement-banner {
+            background: var(--gradient-1);
+            color: var(--text-white);
+            text-align: center;
+            padding: 0.75rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 2000;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            backdrop-filter: blur(10px);
+        }
+
+        .announcement-banner span {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: rgba(10, 10, 10, 0.95);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            height: 80px;
+            top: 38px;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-family: 'Italiana', serif;
+            font-size: 1.75rem;
+            color: var(--text-white);
+            text-decoration: none;
+            letter-spacing: 3px;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--primary-red);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-white);
+            font-weight: 500;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1010;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: var(--text-white);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1005;
+            transform: translateY(-100%);
+            transition: transform 0.4s ease;
+            padding-top: 80px;
+        }
+
+        .mobile-nav.active {
+            transform: translateY(0);
+        }
+
+        .mobile-nav a {
+            font-size: 1.5rem;
+            color: var(--text-white);
+            text-decoration: none;
+            margin: 1rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--primary-red);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        .faq-section {
+            padding: 180px 5% 100px;
+            background: var(--primary-black);
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-title {
+            font-family: 'Italiana', serif;
+            font-size: 4rem;
+            margin-bottom: 3rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .faq-category {
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .faq-category h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-white);
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: var(--text-white);
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            color: var(--text-gray);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 1.5rem;
+            max-height: 500px;
+        }
+
+        .faq-toggle {
+            width: 20px;
+            height: 20px;
+            position: relative;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 15px;
+        }
+
+        .faq-toggle::before,
+        .faq-toggle::after {
+            content: '';
+            position: absolute;
+            background: var(--text-white);
+            transition: all 0.3s ease;
+        }
+
+        .faq-toggle::before {
+            width: 2px;
+            height: 20px;
+            left: 9px;
+            top: 0;
+        }
+
+        .faq-toggle::after {
+            width: 20px;
+            height: 2px;
+            left: 0;
+            top: 9px;
+        }
+
+        .faq-item.active .faq-toggle::before {
+            transform: rotate(90deg);
+            opacity: 0;
+        }
+
+        /* Newsletter Banner */
+        .newsletter-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            z-index: 1000;
+        }
+
+        .newsletter-banner-text {
+            color: var(--text-white);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .newsletter-banner-button {
+            background: var(--gradient-1);
+            color: var(--text-white);
+            padding: 0.75rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-banner-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 51, 51, 0.2);
+        }
+
+        @media (max-width: 968px) {
+            .faq-title {
+                font-size: 3rem;
+            }
+
+            .faq-category h3 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+
+            .faq-title {
+                font-size: 2.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .faq-category h3 {
+                font-size: 1.75rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .faq-category {
+                margin-bottom: 3rem;
+            }
+
+            .newsletter-banner {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1.5rem;
+                text-align: center;
+            }
+            
+            .navbar {
+                height: 60px;
+                padding: 0.75rem 5%;
+                top: 32px;
+            }
+            
+            .logo {
+                font-size: 1.3rem;
+            }
+            
+            .announcement-banner {
+                font-size: 0.75rem;
+                padding: 0.5rem 3%;
+            }
+            
+            .faq-section {
+                padding: 120px 5% 80px;
+            }
+            
+            .faq-question {
+                padding: 1.25rem;
+                font-size: 0.95rem;
+            }
+            
+            .faq-item.active .faq-answer {
+                padding: 1.25rem;
+                font-size: 0.9rem;
+            }
+            
+            .faq-item {
+                margin-bottom: 1rem;
+            }
+            
+            .newsletter-banner-button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .faq-title {
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .faq-category h3 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            .faq-question {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .faq-item.active .faq-answer {
+                padding: 1rem;
+                font-size: 0.85rem;
+            }
+            
+            .faq-toggle {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .faq-toggle::before {
+                height: 16px;
+                left: 7px;
+            }
+            
+            .faq-toggle::after {
+                width: 16px;
+                top: 7px;
+            }
+            
+            .faq-category {
+                margin-bottom: 2.5rem;
+            }
+            
+            .faq-section {
+                padding: 110px 5% 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Announcement Banner -->
+    <div class="announcement-banner">
+        <span>End of season markdowns.</span> Get up to 10% off select styles.
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="logo">VISIONHEARTZ</a>
+        <div class="nav-links">
+            <a href="collections.html">Collection</a>
+            <a href="about.html">Vision</a>
+            <a href="contact.html">Contact</a>
+            <a href="faq.html">Faq</a>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <a href="collections.html">Collection</a>
+        <a href="about.html">Vision</a>
+        <a href="contact.html">Contact</a>
+        <a href="faq.html">Faq</a>
+        <a href="cart.html">Cart</a>
+    </div>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="faq-container">
+            <h2 class="faq-title">Frequently Asked Questions</h2>
+            
+            <!-- Ordering & Shipping -->
+            <div class="faq-category">
+                <h3>Ordering & Shipping</h3>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How long does shipping take?
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        Standard delivery takes 3-5 business days within the US, and 7-14 business days internationally. We also offer express shipping options at checkout for faster delivery times.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do you ship internationally?
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! We ship worldwide. International shipping rates and delivery times vary by location. You can view exact shipping costs at checkout.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How can I track my order?
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        Once your order ships, you'll receive a confirmation email with tracking information. You can also track your order through our website using your order number.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Returns & Exchanges -->
+            <div class="faq-category">
+                <h3>Returns & Exchanges</h3>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What is your return policy?
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        We accept returns within 30 days of purchase for unworn items.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do I start a return or exchange?
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        To initiate a return or exchange, please email.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Care -->
+            <div class="faq-category">
+                <h3>Product Care</h3>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Are your products sustainable?
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, sustainability is at the core of our brand. We use eco-friendly materials and ethical manufacturing processes. All our packaging is recyclable or biodegradable.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment & Security -->
+            <div class="faq-category">
+                <h3>Payment & Security</h3>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What payment methods do you accept?
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        We accept all major credit cards (Visa, Mastercard, American Express), PayPal, and Apple Pay. All transactions are secure and encrypted.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is my payment information secure?
+                        <div class="faq-toggle"></div>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, we use industry-standard SSL encryption to protect your payment information. We never store your credit card details on our servers.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+    
+        // Animate FAQ title
+        gsap.to('.faq-title', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: '.faq-section',
+                start: 'top center+=100'
+            }
+        });
+    
+        // Animate FAQ categories
+        gsap.utils.toArray('.faq-category').forEach((category, index) => {
+            gsap.to(category, {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                delay: 0.2 * index,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: category,
+                    start: 'top center+=100'
+                }
+            });
+        });
+    
+        // FAQ Toggle Functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const category = item.parentElement;
+                
+                // Close other items in the same category
+                category.querySelectorAll('.faq-item').forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Toggle mobile menu
+        const hamburger = document.querySelector('.hamburger');
+        const mobileNav = document.querySelector('.mobile-nav');
+        
+        if (hamburger) {
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                if (mobileNav) {
+                    mobileNav.classList.toggle('active');
+                }
+                document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : 'auto';
+            });
+        }
+
+        // Close mobile menu when clicking a link
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (hamburger && mobileNav) {
+                    hamburger.classList.remove('active');
+                    mobileNav.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
